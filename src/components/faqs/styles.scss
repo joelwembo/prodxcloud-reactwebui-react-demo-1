@@ -1,0 +1,121 @@
+@use  '../../scss/' as *;
+
+.tf-flat-accordion2 {
+    & .flat-toggle2 {
+        background: var(--primary-color8);
+        padding: 33px 26px 33px 20px;
+        margin-bottom: 24px;
+        &.active {
+            & .toggle-content {
+                display: block;
+            }
+        }
+        & .toggle-title {
+            position: relative;
+            font-family: 'Bakbak One';
+            font-weight: 400;
+            font-size: 24px;
+            padding-right: 30px;
+            text-transform: capitalize;
+            color: var(--primary-color27);
+            cursor: pointer;
+            &::after {
+                font-family: 'Font Awesome 5 Pro';
+                font-weight: 300;
+                color: #21E786;
+                content: '\f067';
+                margin-right: 0px;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+            }
+            &.active {
+                color: var(--primary-color3);
+                &::after {
+                    content: '\f068';
+                    opacity: 1;
+                    margin-right: 0px;
+                }
+            }
+        }
+        & .toggle-content {
+            display: none;
+            
+            & p {
+                padding-top: 16px;
+                margin-top: 18px;
+                border-top: 2px solid var(--primary-color28);
+                font-family: 'Poppins';
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 28px;
+                color: var(--primary-color2);
+            }
+        }
+    }
+}
+
+.accordion-item {
+        background: var(--primary-color8);
+        padding: 33px 26px 33px 20px;
+        margin-bottom: 24px;
+    .accordion-header {
+        line-height: 0;
+        overflow: hidden;
+        .accordion-button {
+            overflow: hidden;
+            background: transparent;
+            width: 100%;
+            position: relative;
+            font-family: 'Bakbak One';
+            font-weight: 400;
+            font-size: 24px;
+            padding: 0;
+            padding-right: 30px;
+            padding-bottom: 18px;
+            text-transform: capitalize;
+            color: var(--primary-color27);
+            cursor: pointer;
+            text-align: left;
+
+            
+            border-bottom: 2px solid var(--primary-color28);
+            &.collapsed {
+                padding-bottom: 0;
+                border-bottom: 2px solid transparent;  
+
+                &::after {
+                    content: "\f067";
+                    margin-right: 0px;
+                }
+            }
+
+            &::after {
+                font-family: 'Font Awesome 5 Pro';
+                font-weight: 300;
+                color: #21E786;
+                content: '\f068';
+                opacity: 1;
+                margin-right: 0px;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+            }
+        }
+    }
+
+
+    .toggle-content {
+        
+            padding-top: 16px;
+            
+            
+            font-family: 'Poppins';
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 28px;
+            color: var(--primary-color2);
+    }
+}

@@ -1,0 +1,69 @@
+@use '../../scss/' as *;
+.tf-page-title {
+    padding: 77px 0;
+    text-align: center;
+    background: url('../../assets/images/background/bg-pagetitle.jpg')center center no-repeat fixed;
+    background-size: cover;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0, 0.5);
+    }
+    &.style-2 {
+        padding: 24px 0 15px;
+    }
+    .breadcrumbs {
+        width: 100%;
+        @include flex(center,center);
+        li {
+            font-family: 'Bakbak One';
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            display: inline-block;
+            padding: 0 10px 0 0px;
+            color: var(--primary-color5);
+            text-transform: uppercase;
+            &:last-child {
+                padding-right: 0;
+            }
+            a {
+                font-weight: 700;
+                position: relative;
+                color: #888B8E;
+                padding-right: 11px;
+                
+                &::after {
+                    content: "";
+                    position: absolute;
+                    color: #888B8E;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 0;
+                    width: 2px;
+                    height: 16px;
+                    background-color:#888B8E ;
+                }
+                &:hover {
+                    color: var(--primary-color5);
+                }
+            }
+            
+        }
+    }
+    .page-title-heading {
+        color: #fff ;
+        margin-bottom: 12px;
+    }
+    &.style-2 {
+        .breadcrumbs {
+            margin-bottom: 0;
+        }
+    }
+}

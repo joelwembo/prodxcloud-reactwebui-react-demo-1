@@ -1,0 +1,531 @@
+@use '../../scss/' as *;
+
+.tf-roadmap {
+    position: relative;
+    margin-left: -15px;
+    margin-right: -15px;
+    z-index: 5;
+    & .sl-roadmap {
+        padding-bottom: 80px;
+        max-width: 1400px;
+        overflow: inherit;
+
+        @include tablet {
+            padding-bottom: 0;
+        }
+    }
+    .swiper-button-prev, .swiper-button-next {
+        position: absolute !important;
+        top: auto;
+        bottom: 0;
+        position: unset;
+        width: unset;
+        height: unset;
+        &::after {
+            border: 1px solid var(--primary-color12);
+            width: 48px;
+            height: 48px;
+            background:var(--primary-color15);
+            border-radius: unset;
+            color: var(--primary-color3);
+            font-size: 55px;
+            font-weight: 100;
+            @include transition3;
+        }
+        &:hover {
+            &::after {
+                background: #21E786;
+                color: #141B22;
+            }
+        }
+        @include tablet {
+            display: none;
+        }
+    } 
+    .swiper-button-prev {
+        left: 46%;
+    }
+    .swiper-button-next {
+        right: 46%;
+        &::after {
+            background: #21E786;
+            color: #141B22;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 28px;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--product-color16);
+        z-index: -1;
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        top: 28px;
+        left: 0;
+        width: calc(50%);
+        height: 5px;
+        background: linear-gradient(180deg, #27AE60 0%, #27AE60 100%);
+        z-index: 0;
+    }
+    & .roadmap-box {
+        position: relative;
+        & .shape-circle {
+            text-align: center;
+        }
+        & .content {
+            background: var(--product-color19);
+            backdrop-filter: blur(60px);
+            padding: 24px 15px 24px 24px;
+            margin-top: -8px;
+            position: relative;
+            @include transition5;
+            &::before {
+                opacity: 0;
+                @include transition5;
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                top: 0px;
+                left: 0px;
+                border-left: 5px solid #21E786;   
+                border-top: 5px solid #21E786;
+               
+            }
+            &::after {
+                opacity: 0;
+                @include transition5;
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                bottom: 0px;
+                right: 0px;
+                border-right: 5px solid #21E786;
+                border-bottom: 5px solid #21E786;
+                
+            }
+            &.active,
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0px 5px 15px var(--primary-color36);
+                &::before,&::after {
+                    opacity: 1;
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+            & .title {
+                font-family: 'Bakbak One';
+                font-weight: 400;
+                font-size: 24px;
+                text-transform: capitalize;
+                color: var(--primary-color3);
+                margin-bottom: 13px;
+            }
+            & .list-infor {
+                & li {
+                    & .icon {
+                        margin-right: 7px;
+                    }
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Poppins';
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 26px;
+                    color: var(--primary-color);
+                    margin-bottom: 7px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tf-roadmap.style2 {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 896px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 72px 0px 0;
+    z-index: 5;
+    &::before,
+    &::after {
+        height: 1386px;
+        width: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+    }
+    &::before {
+        height: 590px;
+    }
+
+    .roadmap-box-2 {
+        background: var(--product-color19);
+        backdrop-filter: blur(60px);
+        padding: 24px 22px 22px 24px;
+        max-width: 301px;
+        @include transition3;
+        &::before {
+            opacity: 0;
+            @include transition5;
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 0px;
+            left: 0px;
+            border-left: 5px solid #21E786;   
+            border-top: 5px solid #21E786;
+          
+        }
+        &::after {
+            opacity: 0;
+            @include transition5;
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            bottom: 0px;
+            right: 0px;
+            border-right: 5px solid #21E786;
+            border-bottom: 5px solid #21E786;
+         
+        }
+        &.active,
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 5px 15px var(--primary-color36);
+            &::before,&::after {
+                opacity: 1;
+                width: 50px;
+                height: 50px;
+            }
+        }
+        &:nth-child(n) {
+            margin-top: -16px;
+        }
+        &:nth-child(2n) {
+            margin-top: 192px;
+        }
+       
+        .content {
+            & .title {
+                font-family: 'Bakbak One';
+                font-weight: 400;
+                font-size: 24px;
+                text-transform: capitalize;
+                color: var(--primary-color3);
+                margin-bottom: 13px;
+                
+            }
+            & .list-infor {
+                & li {
+                    & .icon {
+                        margin-right: 7px;
+                    }
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Poppins';
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 26px;
+                    color: var(--primary-color);
+                    margin-bottom: 7px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        .shape-circle {
+            position: absolute;
+            right: 0;
+            top: 52.5%;
+            transform: translate(100%,-50%);
+        }
+
+        &.right {
+            .shape-circle {
+                right: auto;
+                left: 0;
+                transform: translate(-100%,-50%) rotateY(-180deg);
+            }
+        }
+
+    }
+
+    @include tablet {
+        flex-direction: column;
+
+        &::before,
+    &::after {
+        left: auto;
+        right: 0;
+        height: 100%;
+    }
+
+        .roadmap-box-2 {
+            margin-top: 0 !important;
+            margin-bottom: 40px;
+            max-width: 100%;
+            width: calc(100% - 150px);
+            
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .shape-circle {
+                left: auto !important;
+                right: 0 !important;
+                transform: translate(100%, -50%) !important;
+            }
+
+            &.right {
+                .shape-circle {
+                    transform: translate(100%, -50%) !important;
+                }
+            }
+        }
+    }
+}
+
+.sl-roadmap {
+    .swiper-slide {
+        .shape-circle {
+            svg {
+                .fill-1 {
+                    fill: #767676;   
+                }
+                .fill-2 {
+                    fill: #888B8E;   
+                }
+            }
+        }
+        &.swiper-slide-active {
+            
+            .shape-circle {
+                svg {
+                    .fill-1 {
+                        fill: #21E786;   
+                    }
+                    .fill-2 {
+                        fill: #21E786;   
+                    }
+                }
+            }
+            // .roadmap-box {
+            //     .content {
+            //         &::before,&::after {
+            //             opacity: 1;
+            //         }
+            //     }
+            // }
+        }
+    }  
+}
+
+.tf-roadmap-style-thumb {
+    overflow: hidden;
+    & .content-rm-thumb {
+        display: flex;
+        align-items: center;
+        padding: 48px 42px 48px 42px;
+        background: var(--product-color20);
+        & .content-left {
+            display: flex;
+            & .thumb-left {
+                margin-right: 20px;
+            }
+            & .thumb-right {
+                & .top {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+        & .content-right {
+            margin-left: 80px;
+            & h3 {
+                font-family: 'Bakbak One';
+                font-weight: 400;
+                font-size: 36px;
+                text-transform: uppercase;
+                color: var(--primary-color3);
+                margin-bottom: 7px;
+            }
+            & .list-infor {
+                margin-bottom: 24px;
+                & li {
+                    display: flex;
+                    align-items: center;
+                    font-family: 'Poppins';
+                    font-weight: 400;
+                    font-size: 18px;
+                    color: var(--product-color18);
+                    margin-bottom: 4.5px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                    & .icon {
+                        margin-right: 12px;
+                        margin-top: 7px;
+                    }
+                }
+            }
+            & .tf-button {
+                padding: 10px 23px 10px 22px;
+            }
+        }
+
+        @include tablet {
+            flex-wrap: wrap;
+
+            .content-left {
+                width: 100%;
+            }
+
+            .content-right {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 50px;
+            }
+        }
+    }
+}
+
+
+.sl-roadmap3 {
+    margin-top: 23px;
+    position: relative;
+    & .thumb-rm {
+        text-align: center;
+        margin-left: 48px;
+        cursor: pointer;
+        & h5 {
+            font-family: 'Bakbak One';
+            font-weight: 400;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+    }
+    & .swiper-button-next,
+    & .swiper-button-prev {
+        position: absolute;
+        top: 20px;
+        width: unset;
+            height: unset;
+        &::after {
+            background: transparent;
+            width: unset;
+            height: unset;
+            font-size: 30px;
+            border-radius: unset;
+            border: none;
+        }
+    }
+    & .swiper-pagination-progressbar {
+        position: absolute;
+        top: 14px !important;
+        z-index: 0;
+        width: 94% !important;
+        left: 45px !important;
+        height: 2.4px !important;
+        background: #434343 !important;
+        & .swiper-pagination-progressbar-fill {
+            background: #21E786;
+            height: 2.4px !important;
+        }
+    }
+    & .swiper-button-next {
+        right: 10px;
+        &::after {
+            content: '\f105';
+            color: #21E786;
+        }
+    }
+    & .swiper-button-prev {
+        left: 10px;
+        &::after {
+            content: '\f104';
+            color: var(--primary-color2);
+        }
+        &:hover::after {
+            color: #21E786;
+        }
+    }
+    & .swiper-slide.swiper-slide-thumb-active {
+        & .fill-pri {
+            fill: #21E786;
+        }
+    }
+}
+
+.section-bg-1 {
+    background: var(--bg-section);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+.home-1,.home2,.home3 {
+    .section-bg-1 {
+        background: var(--bg-section3);
+    }
+}
+
+.section-bg-1::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-section2);
+    opacity: 0.9;
+    z-index: 0;
+}
+
+.section-roadmap {
+    padding-top: 100px;
+    padding-bottom: 212px;
+}
+
+.section-roadmap2 {
+    padding-top: 128px;
+    padding-bottom: 263px;
+    & .shape1 {
+        position: absolute;
+        top: 5%;
+        right: -1%;
+        z-index: 4;
+    }
+    & .shape2 {
+        position: absolute;
+        bottom: 14%;
+        left: 11%;
+        z-index: 4;
+    }
+}
+
+.section-roadmap3 {
+    padding-top: 100px;
+    padding-bottom: 186px;
+}

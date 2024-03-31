@@ -1,0 +1,96 @@
+@use '../../scss/' as *;
+.tf-team {
+    text-align: center;
+    background: var(--primary-color8);
+    padding: 40px 0 32px;
+    margin-bottom: 30px;
+    position: relative;
+    filter: drop-shadow(0px 5px 15px rgba(71, 92, 133, 0.1));
+    @include transition5;
+    .image {
+        width: 120px;
+        height: 120px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto;
+        margin-bottom: 32px;
+        img {
+            object-fit: cover;
+        }
+    }
+    .name {
+        color: var(--primary-color3);
+        margin-bottom: 4px;
+    }
+    .position {
+        font-size: 18px;
+        line-height: 28px;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+    }
+    .social {
+        @include flex(center,center);
+        li {
+            margin-right: 17px;
+            &:last-child {
+                margin-right: 0;
+            }
+            a {
+                color: #C2C3C5;
+                &:hover {
+                    color: var(--primary-color5);
+                }
+            }
+        }
+    }
+    &::before {
+        opacity: 0;
+        @include transition5;
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0px;
+        left: 0px;
+        border-left: 5px solid #21E786;   
+        border-top: 5px solid #21E786;
+
+    }
+    &::after {
+        opacity: 0;
+        @include transition5;
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        bottom: 0px;
+        right: 0px;
+        border-right: 5px solid #21E786;
+        border-bottom: 5px solid #21E786;
+   
+    }
+    &.active,
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 5px 15px var(--primary-color36);
+        &::before,&::after {
+            opacity: 1;
+            width: 50px;
+            height: 50px;
+        }
+    }
+    
+}
+
+.is_dark .tf-team {
+    box-shadow: 0px 2px 5px rgba(28, 36, 51, 0.1);
+    filter: none;
+    &.active,
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 5px 15px var(--primary-color36);
+        &::before,&::after {
+            opacity: 1;
+        }
+    }
+}

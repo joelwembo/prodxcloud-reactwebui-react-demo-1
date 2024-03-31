@@ -1,0 +1,85 @@
+@use '../../scss/' as *;
+
+.tf-product {
+    background: var(--primary-color23);
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0px 10px 25px rgba(71, 92, 133, 0.1);
+    position: relative;
+    @include transition3;
+    .image {
+        margin-bottom: 20px;
+        overflow: hidden;
+        img {
+            width: 100%;
+            @include transition3;
+        }
+    }
+    .name {
+        color: var(--primary-color3);
+        a {
+            text-transform: uppercase;
+        }
+    }
+    &::before {
+        opacity: 0;
+        @include transition5;
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0px;
+        left: 0px;
+        border-left: 5px solid #21E786;   
+        border-top: 5px solid #21E786;
+
+    }
+    &::after {
+        opacity: 0;
+        @include transition5;
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        bottom: 0px;
+        right: 0px;
+        border-right: 5px solid #21E786;
+        border-bottom: 5px solid #21E786;
+
+    }
+    &.active,
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 5px 15px var(--primary-color36);
+        &::before,&::after {
+            opacity: 1;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        &::before,&::after {
+            opacity: 1;
+            width: 50px;
+            height: 50px;
+        }
+        .image {
+            img {
+                transform: scale(1.1);
+            }
+        }
+    }
+    
+}
+
+.is_dark .tf-product {
+    box-shadow: none;
+    &.active,
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 5px 15px var(--primary-color36);
+        &::before,&::after {
+            opacity: 1;
+        }
+    }
+}
