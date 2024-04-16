@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+    prodwebapp:
+        container_name: prodxcloud
+        image: prodxcloud:latest
+        restart: always
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        ports:
+            - "80:80"
+        networks:
+            - prodxcloud-network    
+
+#Docker Networks
+networks:
+  prodxcloud-network:
+    driver: bridge
