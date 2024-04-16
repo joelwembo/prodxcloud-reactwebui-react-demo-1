@@ -67,7 +67,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create EKS Creater 
-        run: aws eks create-cluster --region us-east-1 --name my-demo-cluster
+        run: aws eks list-clusters
+        # run: aws eks create-cluster --region us-east-1 --name my-demo-cluster  --role-arn < from user_account > --resources-vpc-config < here >
         env:
           AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
