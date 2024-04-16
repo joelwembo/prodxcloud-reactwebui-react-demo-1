@@ -103,12 +103,15 @@ jobs:
 
       - name: Deploy to EKS
         run: kubectl expose deployment prodxcloud-deployment --type=LoadBalancer --name=my-service  
-        run: kubectl get services my-service
         env:
           AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION}}
-        
 
-
-     
+      - name: Load Balancer DNS
+        run: kubectl get services my-service 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION}}    
+             
