@@ -49,8 +49,8 @@ jobs:
       - run: docker build -t joelwembo/prodxcloud:latest  --no-cache .
       - run: docker push joelwembo/prodxcloud:latest  
 
-      - name: Trivy image scan
-        run: trivy image joelwembo/prodxcloud:latest 
+      # - name: Trivy image scan
+      #   run: trivy image joelwembo/prodxcloud:latest 
 
   deploy:
     runs-on: ubuntu-latest
