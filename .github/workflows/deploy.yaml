@@ -70,7 +70,7 @@ jobs:
         run: docker pull joelwembo/prodxcloud:latest
 
       - name: Update kubeconfig
-        run: aws eks --region us-east-1 update-kubeconfig --name actions_eks_react
+        run: aws eks --region us-east-1 update-kubeconfig --name my-demo-cluster
         env:
           AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
