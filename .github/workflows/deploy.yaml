@@ -8,6 +8,15 @@ on:
   pull_request:
     branches: [ "master" , 'main']
 
+permissions:
+    contents: write   
+env:
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
+  AWS_DEFAULT_REGION: "us-east-1"    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,8 +32,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
-      - run: npm run build --if-present
+      # - run: npm ci
+      # - run: npm run build --if-present
+      - run: npm list
 
   push-docker-image:
     name: Build Docker image and push to repositories
@@ -61,12 +71,24 @@ jobs:
 
       - name: Update kubeconfig
         run: aws eks --region us-east-1 update-kubeconfig --name actions_eks_react
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION}}    
     
       - name: Deploy to EKS
         run: kubectl apply -f deployment.yaml 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION}} 
 
       - name: Deploy to EKS
-        run: kubectl expose deployment prodxcloud-deployment --type=LoadBalancer --name=my-service   
+        run: kubectl expose deployment prodxcloud-deployment --type=LoadBalancer --name=my-service  
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION}}
         
 
 
