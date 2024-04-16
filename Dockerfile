@@ -1,29 +1,24 @@
-FROM node:18-alpine AS prod
-# set working directory
+# Use an official Node runtime as a parent image
+FROM node:19-alpine as build
+# Set the working directory to /app
 WORKDIR /app
+# Copy the package.json and package-lock.json to the container
 COPY package*.json ./
-# COPY build ./
-COPY .env ./
-COPY tsconfig.json ./
-RUN npm install --legacy-peer-deps
-# RUN npm ci for production
-# For reverse proxy settings
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# COPY public ./
+
+# Install dependencies
+RUN npm install
+# Copy the rest of the application code to the container
 COPY . .
-# Build Stage
-# RUN npm test - if you want to test before to build
-# We are going to run build on Jenkinsfile
+# Build the React app
 RUN npm run build
-# Step 2: Serve the React app using Nginx
-FROM nginx:alpine AS webserver
-
-WORKDIR /usr/share/nginx/html
-COPY --from=prod /app/build .
-# OR COPY --from=prod /app/build /usr/share/nginx/html
-
-# EXPOSE 3000
-# EXPOSE 4000
-# run nginx with global directives and daemon off
+# Use an official Nginx runtime as a parent image
+FROM nginx:1.21.0-alpine
+# Copy the ngnix.conf to the container
+COPY ngnix.conf /etc/nginx/conf.d/default.conf
+# Copy the React app build files to the container
+COPY --from=build /app/build /usr/share/nginx/html
+# Expose port 80 for Nginx
 EXPOSE 80
-# CMD ["npm", "start"] 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Start Nginx when the container starts
+CMD ["nginx", "-g", "daemon off;"]

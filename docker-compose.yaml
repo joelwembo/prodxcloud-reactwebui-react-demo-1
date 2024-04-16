@@ -1,18 +1,11 @@
-version: "3.8"
-services:
-    prodwebapp:
-        container_name: prodxcloud
-        image: prodxcloud:latest
-        restart: always
-        build:
-            context: .
-            dockerfile: ./Dockerfile
-        ports:
-            - "80:80"
-        networks:
-            - prodxcloud-network    
+version: '3'
 
-#Docker Networks
-networks:
-  prodxcloud-network:
-    driver: bridge
+services:
+  my-react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./ngnix.conf:/etc/nginx/conf.d/default.conf

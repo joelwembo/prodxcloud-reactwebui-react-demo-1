@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-        App Deployment With <code>PRODXCLOUD</code> Using S3 and CDK.
+        App Deployment With <code>PRODXCLOUD</code> ArgoCD , AWS EKS and Github Actions.
         </p>
         <a
           className="App-link"
