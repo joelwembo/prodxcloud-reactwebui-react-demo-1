@@ -1,14 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
 import App from './App';
+import './assets/css/bootstrap.min.css';
+import './assets/css/custom-animated.css';
+import './assets/css/default.css';
+import './assets/css/font-awesome.min.css';
+import './assets/css/magnific-popup.css';
+import './assets/css/magnific.dark.css';
+import './assets/css/magnific.rtl.css';
+import './assets/css/main.css';
+import './assets/css/style.css';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+ReactDOM.render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
