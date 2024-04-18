@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+     options {
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+      }
+       environment {
+        DOMAIN_NAME = ""
+        PUBLIC_S3_BUCKET = ""
+        DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
+        appName = "server"
+        registry = ""
+        registryCredential = ""
+        projectPath = ""
+        AWS_ACCESS_KEY_ID = credentials('your_aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('your_aws_secret_access_key')
+        AWS_REGION = 'your_aws_region'
+        EC2_INSTANCE = 'your_ec2_instance_id'
+        SSH_KEY = credentials('your_ssh_key')
+      }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/joelwembo/prodx-reactwebui-react-demo-1.git'
+            }
+        }
+        stage('Build React App') {
+            steps {
+                sh 'npm install' // Install dependencies
+                sh 'npm run build' // Build the React application
+            }
+        }
+        stage('Provision AWS Infrastructure (Terraform)') {
+            steps {
+                sh 'terraform init' // Initialize Terraform
+                sh 'terraform plan' // Validate Terraform configuration
+                input 'Confirm?' message: 'Are you sure you want to deploy to AWS?'
+                sh 'terraform apply -auto-approve' // Apply Terraform configuration (requires confirmation)
+            }
+        }
+        stage('Deploy to CloudFront') {
+            steps {
+                // Upload built React app to S3 bucket (replace with your upload script)
+                sh 'aws s3 cp build/ s3://your-bucket-name/ --recursive --profile prod-credentials'
+                // Invalidate CloudFront cache to ensure latest content is served (replace with your invalidation script)
+                sh 'aws cloudfront create-invalidation --distribution-id your-distribution-id --paths "/*" --profile prod-credentials'
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs() // Clean workspace after pipeline execution
+        }
+    }
+}
