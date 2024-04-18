@@ -18,37 +18,3 @@ You may also see any lint errors in the console.
 DOCKER_SCAN_SUGGEST=false docker build -t prodxcloud:latest .
 docker run -p 80:80 --name react prodxcloud:latest
 
-## run ssl
-# docker-compose -f ./deployments/traefik/docker-compose-ssl.yml up -d
-# DOCKER_SCAN_SUGGEST=false docker build -t prodxcloud:latest .
-# docker-compose -f ./docker-compose-ssl.yml up -d
-
-docker build -t joelwembo/prodxcloud:latest .
-docker run -p 80:80 --name react joelwembo/prodxcloud:latest
-
-# For SSL Certificate in your react application use following Script
-
-# docker-compose -f ./deployments/traefik/docker-compose-ssl.yml up -d
-# DOCKER_SCAN_SUGGEST=false docker build -t prodxcloud:latest .
-# docker-compose -f ./docker-compose-ssl.yml up -d
-
-
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## 
-"start": "react-scripts --openssl-legacy-provider start",
-"build": "react-scripts --openssl-legacy-provider build",
