@@ -116,3 +116,6 @@ dist
 
 # wincompare file
 .bak
+
+deployments
+./deployments
