@@ -49,3 +49,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## 
+
+ // "start": "SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+// "build": "SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
