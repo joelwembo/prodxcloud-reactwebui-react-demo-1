@@ -42,12 +42,14 @@ pipeline {
 
         stage('Provision AWS Infrastructure (Terraform)') {
             steps {
+                sh "pwd"
                 dir('deployments/terraform/terraform-cloudfront-route53-acm') {
                     sh "pwd"
                     sh "terraform version"
                     sh 'terraform init -lock=false' // Initialize Terraform
                     sh 'terraform apply -auto-approve -input=false -lock=false' // Apply Terraform configuration (requires confirmation)
                 }
+                 sh "pwd"
             }
         }
         stage('Deploy to CloudFront') {
