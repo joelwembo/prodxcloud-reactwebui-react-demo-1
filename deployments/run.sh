@@ -7,3 +7,10 @@ docker run -p 80:80 --name react joelwembo/prodxcloud:latest
 # DOCKER_SCAN_SUGGEST=false docker build -t prodxcloud:latest .
 # docker-compose -f ./docker-compose-ssl.yml up -d
 
+
+
+ANSIBLE_LOCALHOST_WARNING=False \
+ANSIBLE_INVENTORY_UNPARSED_WARNING=False \
+ansible-playbook ansible-playbook-ec2.yml --tags create_ec2
+
+# ami-0cd59ecaf368e5ccf
