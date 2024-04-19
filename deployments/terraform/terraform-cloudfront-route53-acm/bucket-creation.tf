@@ -10,13 +10,13 @@ resource "aws_s3_bucket" "s3-bucket" {
 # Using null resource to push all the files in one time instead of sending one by one
 resource "null_resource" "upload-to-S3" {
   provisioner "local-exec" {
-    command = "aws s3 sync ${path.module}/react_app s3://${aws_s3_bucket.s3-bucket.id}"
+    command = "aws s3 sync ${path.module}/react_app_production s3://${aws_s3_bucket.s3-bucket.id}"
   }
 }
 
 resource "null_resource" "upload-to-S3-2" {
   provisioner "local-exec" {
-    command = "aws s3 sync ${path.module}/react_app s3://${aws_s3_bucket.s3-bucket.id}"
+    command = "aws s3 sync ${path.module}/react_app_production s3://${aws_s3_bucket.s3-bucket.id}"
   }
 }
 
