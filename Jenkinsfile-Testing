@@ -43,6 +43,8 @@ pipeline {
         stage('Provision AWS Infrastructure (Terraform)') {
             steps {
                 sh "pwd"
+                sh "export AWS_ACCESS_KEY_ID=AKIAYZITHA4U64YK5VXJ"
+                sh "export AWS_SECRET_ACCESS_KEY=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"
                 dir('deployments/terraform/terraform-cloudfront-route53-acm') {
                     sh "pwd"
                     sh "terraform version"
