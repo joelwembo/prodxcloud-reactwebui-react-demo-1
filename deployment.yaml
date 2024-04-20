@@ -19,7 +19,7 @@ spec:
         ports:
         - containerPort: 80
        
-## added load balancer ( optional)
+## added load balancer ( optional Update with EC2 IP)
 # apiVersion: v1
 # kind: Service
 # metadata:
