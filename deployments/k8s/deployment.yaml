@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prodxcloud-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: prodxcloud
+  template:
+    metadata:
+      labels:
+        app: prodxcloud
+    spec:
+      containers:
+      - name: prodxcloud
+        image: joelwembo/prodxcloud:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+       
+## added load balancer ( optional)
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: prodxcloud
+# spec:
+#   ports:
+#   - port: 80
+#     protocol: TCP
+#     targetPort: 80
+#     nodePort: 31000
+#   selector:
+#     app: prodxcloud
+#   type: LoadBalancer
+# status:
+#   loadBalancer: {}       

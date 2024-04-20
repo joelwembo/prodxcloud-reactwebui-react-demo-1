@@ -1,0 +1,53 @@
+Groovy
+pipeline {
+    agent any
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+    }
+
+    environment {
+        DOMAIN_NAME = ""
+        PUBLIC_S3_BUCKET = ""
+        DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
+        appName = "server"
+        registry = ""
+        registryCredential = ""
+        projectPath = ""
+        AWS_PROFILE = "default"
+        AWS_ACCESS_KEY_ID = credentials('your_aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('your_aws_secret_access_key')
+        AWS_REGION = 'your_aws_region'
+        EC2_INSTANCE = 'your_ec2_instance_id'
+        SSH_KEY = credentials('your_ssh_key')
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                   credentialsId: 'your-git-credentials-id',
+                   url: 'https://github.com/joelwembo/prodx-reactwebui-react-demo-1.git'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t your-app-name:latest .'  // Replace with your Dockerfile path
+            }
+        }
+        stage('Deploy to EC2') {
+            steps {
+                script {
+                    def ec2_host = 'your-ec2-public-dns'  // Replace with your EC2 instance DNS
+                    def username = 'ec2-user'           // Replace if using a different user
+                    def pem_key = 'path/to/your/pem.key' // Replace with your private key path
+                    def ssh_agent = credentialsId: 'your-ssh-credentials-id'
+
+                    sh "ssh -o StrictHostKeyChecking=no -i ${pem_key} ${username}@${ec2_host} docker pull your-docker-registry.com/your-app-name:latest"
+
+                    // Assuming a single container for now. Modify for multiple containers
+                    sh "ssh -o StrictHostKeyChecking=no -i ${pem_key} ${username}@${ec2_host} docker run -d your-app-name:latest"
+                }
+            }
+        }
+    }
+}

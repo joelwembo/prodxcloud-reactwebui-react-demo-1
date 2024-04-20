@@ -1,0 +1,76 @@
+pipeline {
+    agent any
+     options {
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+      }
+       environment {
+        DOMAIN_NAME = ""
+        PUBLIC_S3_BUCKET = ""
+        DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
+        appName = "server"
+        registry = ""
+        registryCredential = ""
+        projectPath = ""
+        AWS_ACCOUNT=credentials('AWS_ACCOUNT')
+        AWS_ACCESS_KEY_ID=credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY=credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_REGION=credentials('AWS_REGION')
+        AWS_EC2_INSTANCE=credentials('AWS_EC2_INSTANCE') # 34.238.119.22 
+        AWS_SSH_KEY = credentials('AWS_SSH_KEY')
+      }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/joelwembo/prodx-reactwebui-react-demo-1.git'
+            }
+        }
+
+         stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+         stage('Run Mocha Tests') {
+            steps {
+                sh 'npm run test' // Assuming your tests are run with 'npm test'
+            }
+        }
+
+        stage('Build React App') {
+            steps {
+                sh 'npm run build' // Build the React application only if tests pass (conditional stage success)
+            }
+        }
+
+        stage('Provision AWS Infrastructure (Terraform)') {
+            steps {
+                sh 'terraform init' // Initialize Terraform
+                sh 'terraform plan' // Validate Terraform configuration
+                input 'Confirm?' message: 'Are you sure you want to deploy to AWS?'
+                sh 'terraform apply -auto-approve' // Apply Terraform configuration (requires confirmation)
+            }
+        }
+        stage('Deploy to CloudFront') {
+            steps {
+                // Upload built React app to S3 bucket (replace with your upload script)
+                sh 'aws s3 cp build/ s3://your-bucket-name/ --recursive --profile default'
+                // Check if Cloudfront was created && Invalidate CloudFront cache to ensure latest content is served (replace with your invalidation script)
+                sh 'aws cloudfront create-invalidation --distribution-id your-distribution-id --paths "/*" --profile default'
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs() // Clean workspace after pipeline execution
+        }
+        success {
+            // Optional: Send notification on successful builds (e.g., email)
+        }
+        failure {
+            // Optional: Send notification on failed builds (e.g., email)
+        }
+    }
+}
