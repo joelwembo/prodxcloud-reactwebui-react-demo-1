@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  reactservertypescript:
+    container_name: prodxcloud
+    image: prodxcloud:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prodxcloud.rule=Host(`prod-app-ether.co`)"
+      - "traefik.http.routers.prodxcloud.entrypoints=websecure"
+      - "traefik.http.routers.prodxcloud.tls.certresolver=myresolver"
+      - "traefik.http.services.prodxcloud.loadbalancer.server.port=80"
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      - traefik_default
+networks:
+  traefik_default:
+    external: true
