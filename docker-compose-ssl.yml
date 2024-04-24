@@ -6,7 +6,7 @@ services:
     image: prodxcloud:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prodxcloud.rule=Host(`54.165.83.187`)"
+      - "traefik.http.routers.prodxcloud.rule=Host(`ec2-54-165-83-187.compute-1.amazonaws.com`)"
       - "traefik.http.routers.prodxcloud.entrypoints=websecure"
       - "traefik.http.routers.prodxcloud.tls.certresolver=myresolver"
       - "traefik.http.services.prodxcloud.loadbalancer.server.port=3000"

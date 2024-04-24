@@ -19,8 +19,8 @@ COPY ngnix.conf /etc/nginx/conf.d/default.conf
 # Copy the React app build files to the container
 COPY --from=build /app/build /usr/share/nginx/html
 # Expose port 80 for Nginx
-EXPOSE 80
+# EXPOSE 80
 EXPOSE 3000
 EXPOSE 3000/tcp
 # Start Nginx when the container starts
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
