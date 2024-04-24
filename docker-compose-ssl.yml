@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  reactservertypescript:
+  prodxcloud:
     container_name: prodxcloud
     image: prodxcloud:latest
     labels:
