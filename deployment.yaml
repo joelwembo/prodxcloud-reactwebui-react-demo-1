@@ -19,19 +19,22 @@ spec:
         ports:
         - containerPort: 80
        
-## added load balancer ( optional Update with EC2 IP)
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: prodxcloud
-# spec:
-#   ports:
-#   - port: 80
-#     protocol: TCP
-#     targetPort: 80
-#     nodePort: 31000
-#   selector:
-#     app: prodxcloud
-#   type: LoadBalancer
-# status:
-#   loadBalancer: {}       
+# added load balancer ( optional Update with EC2 IP)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prodxcloud
+spec:
+# externalIPs:
+  # - 18.141.186.159
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31000
+  selector:
+    app: prodxcloud
+  type: LoadBalancer
+status:
+  loadBalancer: {}       
