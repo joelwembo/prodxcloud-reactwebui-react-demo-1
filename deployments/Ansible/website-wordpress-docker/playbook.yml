@@ -1,0 +1,78 @@
+---
+- name: Create user and configure sudo permissions
+  hosts: 44.206.252.159 # Your remote Host
+  become: true
+  tasks:
+    - name: Create user ubuntu
+      user:
+        name: ubuntu
+        shell: /bin/bash
+        create_home: yes
+        home: /home/ubuntu
+
+    - name: Allow ubuntu to run whoami with sudo
+      lineinfile:
+        dest: /etc/sudoers
+        line: 'ubuntu ALL=(ALL) NOPASSWD: /usr/bin/whoami'
+        validate: 'visudo -cf %s'
+
+    - name: Install Vim & Other Packages for user Joel Wembo
+      become_user: root
+      apt:
+        state: present
+        name:
+          - vim
+          - htop
+          - git
+          - make
+    - name: Install Nginx
+      # script: installer.sh 
+
+    - name: Install Java
+      become: yes
+      become_user: root
+      apt:
+        name: default-jre
+        state: present
+
+    # - name: Install Debian Keyring
+    #   become: yes
+    #   become_user: root
+    #   apt:
+    #     name: debian-keyring debian-archive-keyring
+    #     state: present    
+
+    - name: Add Jenkins repository key
+      become: yes
+      become_user: root
+      apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        state: present
+
+    - name: Add Jenkins apt repository
+      become: yes
+      become_user: root
+      apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
+
+    - name: Install Jenkins
+      become: yes
+      become_user: root
+      apt:
+        name: jenkins
+        state: present
+
+    - name: Start Jenkins service
+      become: yes
+      become_user: root
+      service:
+        name: jenkins
+        state: started
+
+    
+
+
+   
+
+     

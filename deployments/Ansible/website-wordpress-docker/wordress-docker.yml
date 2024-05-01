@@ -1,0 +1,89 @@
+---
+- name: Create user and configure sudo permissions
+  hosts: 44.206.252.159 # Your remote Host
+  become: true
+  tasks:
+    - name: Create user ubuntu
+      user:
+        name: ubuntu
+        shell: /bin/bash
+        create_home: yes
+        home: /home/ubuntu
+
+    - name: Allow ubuntu to run whoami with sudo
+      lineinfile:
+        dest: /etc/sudoers
+        line: 'ubuntu ALL=(ALL) NOPASSWD: /usr/bin/whoami'
+        validate: 'visudo -cf %s'
+
+    - name: Install ntpdate
+      ansible.builtin.package:
+        name: ntpdate
+        state: present
+    
+
+    - name: Install Docker & Docker-Compose
+      script: installer.sh 
+    # - name: Pull the httpd server image from Docker Hub
+    #   docker_image:
+    #     name: httpd:latest
+    #     source: pull
+
+    # - name: Create /var/www/html directory
+    #   ansible.builtin.file:
+    #     path: /var/www/html
+    #     state: directory
+
+    # - name: Create an HTML file
+    #   ansible.builtin.copy:
+    #     content: "<html><body><h1>Welcome Page default</h1></body></html>"
+    #     dest: /var/www/html/index.html
+
+     # Create a directory to store WordPress files (modify path as needed)
+    - name: Create WordPress directory
+      file:
+        path: /var/www/html/wordpress
+        state: directory
+
+    # Pull the WordPress Docker image
+    - name: Pull WordPress image
+      docker_image:
+        name: wordpress:latest  # Replace with specific version if needed
+        source: pull
+        # state: present
+
+    # Start the WordPress container with a persistent volume
+    - name: Start WordPress container
+      docker_container:
+        name: wordpress
+        image: wordpress:latest
+        ports:
+          - "80:80"  # Maps container port 80 to host port 80 (standard web traffic)
+        volumes:
+          - /var/www/html/wordpress:/var/www/html  # Persists WordPress data
+        state: started
+
+    # for Normal website
+    # - name: Remove the existing container if it exists
+    #   docker_container:
+    #     name: my_httpd_container
+    #     state: absent
+    #   ignore_errors: yes
+
+    # - name: Run the Docker container
+    #   docker_container:
+    #     name: my_httpd_container
+    #     image: httpd:latest
+    #     ports:
+    #       - "8080:80"
+    #     volumes:
+    #       - /var/www/html:/usr/local/apache2/htdocs/
+    #     state: started
+
+  # handlers:
+  #   - name: Reload Apache
+  #     ansible.builtin.service:
+  #       name: httpd
+  #       state: reloaded    
+
+   

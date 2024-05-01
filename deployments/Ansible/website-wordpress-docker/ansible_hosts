@@ -1,0 +1,5 @@
+[hosts_to_add_key]
+44.206.252.159 ansible_ssh_port=22  ansible_user=ubuntu
+
+[hosts_to_add_key:vars]
+ansible_ssh_common_args="-o StrictHostKeyChecking=no"

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Contact me | Joel O. Wembo | AWS Certified | Cloud Solutions Architect - AWS CDK, AWS SAM, Serverless Framework, Terraform, Django & AWS Community Builder</title>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+  </head>
+  <body>
+    <div id="loading"></div>
+    <div class="wrapper">
+      <div id="side-menu">
+        <div class="menu-container">
+          <div class="nav-trigger" role="button" title="sweet hamburger">
+            <div class="hamburger">
+              <div class="icon"></div>
+            </div>
+          </div>
+        </div>
+        <a class="logo hidden-xs" href="index-nav.html">Joel &nbspWembo</a>
+        <a class="logo text visible-xs" href="index.html">JC</a>
+      </div>
+      <div class="menu has-nav">
+        <div class="menu-inner">
+          <div class="container">
+            <div class="col-md-12">
+              <div class="navigation">
+                <h4>navigation</h4>
+                <ul>
+                  <li><a href="index-nav.html">Home</a></li>
+                  <li><a href="about.html">About</a></li>
+                  <li><a href="portfolio-nav.html">Projects</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="footer">
+              <div class="container">
+                <div class="col-md-6 col-xs-4 nopadding">
+                  <div class="social">
+                    <ul>
+                      <li><a href="https://www.linkedin.com/in/joelotepawembo/">linkedin</a></li>
+                      <li><a href="https://www.facebook.com/joel.o.wembo.1/">Facebook</a></li>
+                      <li><a href="https://twitter.com/joelwembo1">Twitter</a></li>
+                      <li><a href="https://www.behance.net/joelwembo">Behance</a></li>
+                      <li><a href="https://joelotepawembo.medium.com/">Medium</a></li>
+                      <li><a href="https://github.com/joelwembo">Github</a></li>
+                      <li><a href="https://www.instagram.com/joel.o.wembo.1/">Instagram</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-8 ">
+                  <div class="address">
+                    <h2>S-25 BGC, Taguig City  <br class="hidden-xs"> Metro Manila, Philippines</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="about-page">
+          <div class="container">
+            <div class="col-md-8">
+              <div class="about">
+                <h6 class="wow fadeInDown" data-wow-delay= ".1s">contact</h6>
+                <h1 class="wow fadeInDown" data-wow-delay= ".12s">Ready. Set. Go</h1>
+                <p class="wow fadeInDown" data-wow-delay= ".4s">
+                  All it takes is gamboling your fingers on that keyboard infront <br class="hidden-xs"> of you. Just do it.
+                </p>
+                <div class="contact-form">
+                 <form id="contact-form" method="post" action="assets/php/contact.php" role="form">
+                   <div class="messages"></div>
+                   <div class="controls">
+                   <div class="row">
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <label for="form_name">Firstname *</label>
+                               <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                               <div class="help-block with-errors"></div>
+                           </div>
+                       </div>
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <label for="form_lastname">Lastname *</label>
+                               <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                               <div class="help-block with-errors"></div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <label for="form_email">Email *</label>
+                               <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                               <div class="help-block with-errors"></div>
+                           </div>
+                       </div>
+                       <div class="col-md-6">
+                           <div class="form-group">
+                               <label for="form_phone">Phone</label>
+                               <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
+                               <div class="help-block with-errors"></div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-md-12">
+                           <div class="form-group">
+                               <label for="form_message">Message *</label>
+                               <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+                               <div class="help-block with-errors"></div>
+                           </div>
+                       </div>
+                       <div class="col-md-12">
+                           <input type="submit" class="btn btn-success btn-send" value="Send message">
+                       </div>
+                     </div>
+                   </div>
+                 </form>
+               </div><!-- Contact Form -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="container">
+            <div class="cta text-center">
+              <h1 class="wow fadeInDown" data-wow-delay= ".1s">Let's get to work <span>!</span></h1>
+                <a class="wow fadeInDown" data-wow-delay= ".2s" href="mailto:contact@joelwembo.com">contact@joelwembo.com</a>
+                <br>
+                <a class="wow fadeInDown" data-wow-delay= ".3s" href="tel:+639455206995">+639455206995</a>
+            </div>
+            <div class="col-md-6 col-xs-4 nopadding">
+              <div class="social">
+                <ul>
+                  <li><a href="https://www.linkedin.com/in/joelotepawembo/">linkedin</a></li>
+                  <li><a href="https://www.facebook.com/joel.o.wembo.1/">Facebook</a></li>
+                  <li><a href="https://twitter.com/joelwembo1">Twitter</a></li>
+                  <li><a href="https://www.behance.net/joelwembo">Behance</a></li>
+                  <li><a href="https://joelotepawembo.medium.com/">Medium</a></li>
+                  <li><a href="https://github.com/joelwembo">Github</a></li>
+                  <li><a href="https://www.instagram.com/joel.o.wembo.1/">Instagram</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-8 ">
+              <div class="address">
+                <h2>S-25 BGC, Taguig City  <br class="hidden-xs"> Metro Manila, Philippines</h2>
+
+              </div>
+            </div>
+          </div>
+        </div><!-- Footer -->
+      </div><!-- Main -->
+    </div><!--Wrapper -->
+    <!-- JS Scripts -->
+    <script src="assets/js/jquery-2.1.1.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/contact.js"></script>
+    <script src="assets/js/validator.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <!-- JS Scripts -->
+  </body>
+</html>

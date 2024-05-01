@@ -1,0 +1,1754 @@
+
+/*--------------
+All Contents
+--------------*/
+
+/*-----------------
+1. Reset.css
+2. Helper Classes
+3. Hamburger and Menu Styling
+4. All homepage sections styling
+	- Home Page intro
+	- Home Work Section
+	- Home portfolio
+	- Clients-section
+	- Home Slider
+5. About Page Styling
+6. Portfolio Page
+7. Projecr Single Page Styling
+8. Services Page Styles
+9. Contact Page Stylins
+10. All Media Queries
+------------------*/
+
+
+/*----- 1. Reset.css -----*/
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* --- Common Styles ---*/
+
+h1 {
+	font-family: Montserrat;
+  font-size: 16px;
+}
+
+/*----- Helper Classes -----*/
+
+html * {
+	text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
+
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+
+::-moz-selection {
+    color: #1106CC;
+    background: #FFFFFF;
+}
+
+::selection {
+    color: #1106CC;
+    background: #FFFFFF;
+}
+
+.nopadding {
+	padding: 0;
+}
+
+.custom-padding {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.no-margin {
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.underline {
+	display: inline;
+	border-bottom: 3px solid #111;
+	padding-bottom: 0;
+}
+
+.after-line {
+	height: 2px;
+	width: 150px;
+	background: #001CFF;
+	margin: auto;
+	margin-top: -20px;
+	margin-bottom: 20px;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.sup-title {
+	display: inline-block;
+	font-size: 1em;
+	padding: 4px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #FFFFFF;
+	background: #000000;
+	margin: 0 0 20px 0;
+}
+
+
+#loading {
+   width: 100%;
+   height: 100%;
+   top: 0px;
+   left: 0px;
+   position: fixed;
+   opacity: 1;
+   background-color: #F9F9F9;
+   z-index: 999;
+   text-align: center;
+}
+
+
+.spacer {
+	width: 100%;
+	height: 50px;
+}
+
+.spacer-big {
+	width: 100%;
+	height: 100px;
+}
+
+.dark h1, .dark h2, .dark h3, .dark p {
+	color: #CCCCCC !important;
+}
+
+.dark .cta-button {
+	background: #CCCCCC !important;
+}
+
+.dark .btn-fill {
+	background: #001CFF !important;
+}
+
+.dark .cta-button:hover {
+	background: #001CFF !important;
+}
+
+.dark .btn-fill:hover {
+	background: #CCCCCC !important;
+}
+
+
+/* -----Body Border -----*/
+
+#top, #bottom, #left, #right {
+	background: #FFFFFF;
+	position: fixed;
+  z-index: 111;
+	}
+#left, #right {
+		top: 0; bottom: 0;
+		width: 10px;
+		}
+#left { left: 0; }
+#right { right: 0; }
+
+#top {
+		left: 0; right: 0;
+		height: 10px;
+	}
+#bottom {
+		left: 0; right: 0;
+		height: 10px;
+	}
+
+#top { top: 0; }
+#bottom { bottom: 0; }
+
+/* ------ Body Border End ------*/
+
+
+.logo {
+	position: absolute;
+	top: 13px;
+	left: 2%;
+	font-family: 'Poppins';
+	font-size: 16px;
+	line-height: 1;
+	white-space: nowrap;
+	color: #222222;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	-o-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.back-btn {
+	top: 10px;
+	font-size: 21px !important;
+}
+
+.text {
+	top: 13px;
+	font-size: 21px;
+}
+
+.logo:hover, .logo:focus {
+	text-decoration: none;
+	color: #333333;
+}
+
+
+/* --------------------------------------------------
+---------- 3. Hamburger and Navigation Starts ----------
+----------------------------------------------------*/
+
+
+.nav-trigger {
+  width: 40px;
+	height: 40px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  border-radius: 0;
+	background-color: #1B1B1B;
+	z-index: 111;
+  transition: all 400ms ease-in;
+  user-select: none;
+}
+
+.is-active.nav-trigger {
+  background: #DDDDDD;
+}
+
+.hamburger {
+  position: relative;
+  width: 25px;
+  height: 25px;
+	left: 20%;
+	top: 20%;
+  transition: transform 500ms ease-in-out;
+}
+
+.nav-trigger:active .hamburger {
+  transition: transform 50ms;
+  transform: scale(.95);
+}
+
+.hamburger::before, .hamburger::after, .hamburger .icon {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 2px;
+	left: 2px;
+  background: #FFFFFF;
+  transform-origin: 100% 50%;
+  transition: all 100ms ease-in-out;
+}
+
+.hamburger::before {
+  top: 5px;
+}
+.hamburger .icon {
+	width: 21px;
+  top: 11px;
+  transform-origin: 50% 50%;
+}
+.hamburger::after {
+  top: 17px;
+}
+
+.is-active .hamburger::before,
+.is-active .hamburger::after,
+.is-active .hamburger .icon {
+  background: #FFFFFF;
+}
+
+.is-active .hamburger::before {
+  transform: translate3d(-4px, -1px, 0) rotateZ(-45deg);
+}
+.is-active .hamburger .icon {
+  transform: rotateY(-90deg);
+  transition: transform 100ms, background-color 400ms ease-in-out;
+}
+.is-active .hamburger::after {
+  transform: translate3d(-4px, 2px, 0) rotateZ(45deg);
+}
+
+
+/* ----- Dimming Main Content When Navigation is Active -----*/
+
+.main::before {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: opacity 0.5s ease, height 1ms 0.5s ease;
+    -moz-transition: opacity 0.5s ease, height 1ms 0.5s ease;
+    -o-transition: opacity 0.5s ease, height 1ms 0.5s ease;
+    transition: opacity 0.5s ease, height 1ms 0.5s ease;
+}
+
+.is-active.main::before {
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+    height: 100%;
+    opacity: 1
+}
+
+/*
+.main.is-active {
+	-webkit-transform: scale(0.98);
+  -moz-transform: scale(0.98);
+  -ms-transform: scale(0.98);
+  -o-transform: scale(0.98);
+  transform: scale(0.98);
+}
+*/
+
+@media only screen and (min-width: 768px) {
+
+	.nav-trigger {
+		right: 0;
+		top: 0;
+	}
+}
+
+
+/* ----------------------------------------------------------
+------------ Hamburger and Navigation Styling Ends ----------
+------------------------------------------------------------*/
+
+
+/* -----------------------------------------------------
+------------- 4. Home Page CSS Starts Here -------------
+-------------------------------------------------------*/
+
+.back-home {
+	position: absolute;
+	left: 20px;
+	top: 20px;
+}
+
+.back-home i {
+	font-size: 34px;
+	color: #666666;
+	-webkit-transition: 0.2s;
+	-moz-transition: 0.2s;
+	-o-transition: 0.2s;
+	transition: 0.2s;
+}
+
+.back-home:hover i {
+	color: #222222;
+}
+
+#side-menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 40px;
+	background: #FFFFFF;
+	z-index: 11;
+}
+
+
+#side-menu .contact-link {
+	position: absolute;
+	bottom: 50px;
+	right: 0;
+	left: 0;
+	font-family: Poppins;
+	font-size: 14px;
+	font-weight: 400;
+	color: #111111;
+	line-height: 1;
+	text-decoration: none;
+	transform: rotate(90deg);
+}
+
+.menu {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #F3F3F3;
+	visibility: hidden;
+	-webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s;
+	-webkit-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+	-moz-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+	transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+}
+
+.menu-inner {
+	height: 100%;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	-webkit-transform: translateX(100%);
+	-moz-transform: translateX(100%);
+	-o-transform: translateX(100%);
+	transform: translateX(100%);
+	-webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  transition: transform 0.5s;
+  -webkit-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+  -moz-transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+  transition-timing-function: cubic-bezier(0.86, 0.01, 0.77, 0.78);
+}
+
+.menu.is-active {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: visibility 0s 0s;
+	-moz-transition: visibility 0s 0s;
+	transition: visibility 0s 0s;
+}
+
+.menu.is-active .menu-inner{
+	-webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: transform 0.5s;
+  -webkit-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+  -moz-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+  transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+}
+
+.menu-inner .details {
+	padding: 170px 0 0 0;
+	height: 100%;
+
+}
+
+.menu-inner .details h1 {
+	font-family: 'Playfair Display';
+	font-size: 28px;
+	font-weight: 400;
+	color: #111111;
+	line-height: 1.2;
+	margin: 0 0 50px 0;
+}
+
+.menu-inner .details h4 {
+	font-family: 'Poppins';
+	font-size: 16px;
+	font-weight: 600;
+	color: #222222;
+	letter-spacing: 0;
+	line-height: 1.4;
+	margin: 0 0 20px 0;
+}
+
+
+.menu-inner .details ul {
+	list-style-type: none;
+}
+
+.menu-inner .details ul li {
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: 400;
+	color: #111111;
+	letter-spacing: 1px;
+	text-decoration: none;
+	line-height: 1.5;
+	margin-right: 10px;
+	display: inline;
+}
+
+.menu-inner .awards {
+	padding: 50px 0 0 0;
+}
+
+.menu-inner .awards h4 {
+	font-family: 'Poppins';
+	font-size: 16px;
+	font-weight: 600;
+	color: #222222;
+	letter-spacing: 0;
+	line-height: 1.4;
+	margin: 0 0 20px 0;
+}
+
+.menu-inner .awards ul {
+	list-style-type: none;
+}
+
+.menu-inner .awards ul li {
+	padding-bottom: 10px;
+}
+
+.menu-inner .awards ul li a {
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: 400;
+	color: #343434;
+	line-height: 1.2;
+	letter-spacing: 1px;
+	text-decoration: none;
+}
+
+
+.menu-inner .about {
+	padding: 100px 0 0 0;
+	height: 100%;
+	overflow-y: auto;
+}
+
+
+.menu-inner .about h6 {
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: 400;
+	color: #A1A1A1;
+	letter-spacing: 1px;
+	line-height: 1.4;
+	margin: 0 0 30px 0;
+}
+
+
+.menu-inner .about h4 {
+	font-family: 'Poppins';
+	font-size: 16px;
+	font-weight: 400;
+	color: #111111;
+	letter-spacing: 1px;
+	line-height: 1.4;
+	margin: 0 0 40px 0;
+}
+
+.menu .about h1 {
+	font-size: 42px;
+	color: #111111;
+	line-height: 1;
+	font-family: 'Playfair Display';
+	font-weight: 700;
+	letter-spacing: -1px;
+	margin: 0 0 10px 0;
+}
+
+.menu .about p {
+	font-size: 13px;
+	color: #888888;
+	line-height: 1.5;
+	font-family: Poppins;
+	font-weight: 400;
+	font-style: normal;
+	letter-spacing: 0;
+	margin: 0 0 20px 0;
+}
+
+.menu-inner .about a {
+	display: inline-block;
+	text-decoration: none;
+	color: #000000;
+}
+
+/* --------------------------------------------------------
+------------ Menu Navigation Styling Starts ---------------
+-----------------------------------------------------------*/
+
+.has-nav {
+	background: linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.99)), url(../images/bg.jpg) no-repeat center center;
+	background-size: cover;
+}
+
+.menu-inner .navigation {
+	padding: 150px 20px 0 0;
+	height: 100%;
+	text-align: right;
+}
+
+.menu-inner .navigation h4 {
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: 400;
+	color: #FF3333;
+	letter-spacing: 1px;
+	line-height: 1.4;
+	margin: 0 0 40px 0;
+}
+
+.menu-inner .navigation ul {
+	list-style-type: none;
+	position: relative;
+}
+
+.menu-inner .navigation ul li {
+	padding-bottom: 15px;
+}
+
+.menu-inner .navigation ul li {
+  display: block;
+	font-family: 'Playfair Display';
+	font-size: 34px;
+	font-weight: 700;
+	color: #444444;
+	line-height: 1.2;
+	letter-spacing: 1px;
+	text-decoration: none;
+	-webkit-transition: 0.2s;
+	-moz-transition: 0.2s;
+	-o-transition: 0.2s;
+	transition: 0.2s;
+}
+
+.menu-inner .navigation ul li a {
+  position: relative;
+  color: #111111;
+	letter-spacing: 1px;
+	text-decoration: none;
+	-webkit-transition: 0.2s;
+	-moz-transition: 0.2s;
+	-o-transition: 0.2s;
+	transition: 0.2s;
+}
+
+.menu-inner .navigation ul li a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #FF3333;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.menu-inner .navigation ul li a:hover::before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+.menu-inner .navigation ul li a:hover,
+.menu-inner .navigation ul li a:focus {
+	letter-spacing: 2px;
+	color: #f90606;
+}
+
+
+.no-touch .menu-inner .navigation ul li a:hover {
+  color: #000;
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*---------------------------------------------------------
+---------------- Menu navigation Styling Ends -------------
+----------------------------------------------------------*/
+
+
+.main {
+	width: 100%;
+	height: 100%;
+	background: #F1F1F1;
+  -webkit-transition: -webkit-transform 0.5s;
+  -moz-transition: -moz-transform 0.5s;
+  transition: transform 0.5s;
+  -webkit-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+  -moz-transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+  transition-timing-function: cubic-bezier(0.82, 0.01, 0.77, 0.78);
+}
+
+.is-active.main {
+	transform: translateX(-100%);
+}
+
+.main .intro {
+	padding: 120px 10px 100px 10px;
+}
+
+.main .intro img {
+	margin-bottom: 50px;
+}
+
+.main .intro h4 {
+	font-family: 'Poppins';
+	font-size: 14px;
+	font-weight: 600;
+	color: #A1A1A1;
+	letter-spacing: 3px;
+	line-height: 1.4;
+	text-transform: uppercase;
+	margin: 0 0 20px 0;
+}
+
+.main .intro h1 {
+	font-size: 32px;
+	color: #161616;
+	line-height: 1.2;
+	text-align: center;
+	font-family: 'Playfair Display';
+	font-weight: 700;
+	font-style: normal;
+	letter-spacing: 0;
+}
+
+.btn-action {
+	font-family: 'Playfair Display';
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1;
+	padding: 10px 16px;
+	color: #FFFFFF;
+	background: #111111;
+	border-radius: 0;
+	border-color: #111111;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	margin: 50px auto;
+	-webkit-transition: 0.4s;
+	-moz-transition: 0.4s;
+	-o-transition: 0.4s;
+	transition: 0.4s;
+}
+
+.btn-action:hover, .btn-action:focus {
+	border-color: #111111;
+	background: transparent;
+	color: #111111;
+}
+
+
+
+
+/*-----------------------------------------------------
+------------- About Page Styling Starts ---------------
+-----------------------------------------------------*/
+
+.about-page {
+	padding: 150px 0 100px 0;
+}
+
+.about-page .details {
+	padding: 50px 0 0 0;
+	height: 100%;
+	overflow-y: auto;
+}
+
+.about-page .details h1 {
+	font-family: 'Playfair Display';
+	font-size: 28px;
+	font-weight: 400;
+	color: #111111;
+	line-height: 1.2;
+	margin: 0 0 50px 0;
+}
+
+.about-page .details h4 {
+	font-family: 'Poppins';
+	font-size: 16px;
+	font-weight: 600;
+	color: #222222;
+	letter-spacing: 0;
+	line-height: 1.4;
+	margin: 0 0 20px 0;
+}
+
+.about-page .details ul {
+	list-style-type: none;
+}
+
+.about-page .details ul li {
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: 400;
+	color: #111111;
+	letter-spacing: 1px;
+	text-decoration: none;
+	line-height: 1.5;
+	margin-right: 10px;
+	display: inline;
+}
+
+.about-page .awards {
+	padding: 50px 0 0 0;
+}
+
+.about-page .awards h4 {
+	font-family: 'Poppins';
+	font-size: 16px;
+	font-weight: 600;
+	color: #222222;
+	letter-spacing: 0;
+	line-height: 1.4;
+	margin: 0 0 20px 0;
+}
+
+.about-page .awards ul {
+	list-style-type: none;
+}
+
+.about-page .awards ul li {
+	padding-bottom: 10px;
+}
+
+.about-page .awards ul li a {
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: 400;
+	color: #343434;
+	line-height: 1.2;
+	letter-spacing: 1px;
+	text-decoration: none;
+}
+
+.about-page .about {
+	height: 100%;
+	overflow-y: auto;
+}
+
+.about-page .about h6 {
+	font-family: 'Poppins';
+	font-size: 12px;
+	font-weight: 400;
+	color: #A1A1A1;
+	letter-spacing: 1px;
+	line-height: 1.4;
+	margin: 0 0 30px 0;
+}
+
+.about-page .about h4 {
+	font-family: 'Poppins';
+	font-size: 16px;
+	font-weight: 400;
+	color: #111111;
+	letter-spacing: 1px;
+	line-height: 1.4;
+	margin: 0 0 40px 0;
+}
+
+.about-page .about h1 {
+	font-size: 42px;
+	color: #111111;
+	line-height: 1;
+	font-family: 'Playfair Display';
+	font-weight: 700;
+	letter-spacing: -1px;
+	margin: 0 0 10px 0;
+}
+
+.about-page .about p {
+	font-size: 13px;
+	color: #888888;
+	line-height: 1.5;
+	font-family: Poppins;
+	font-weight: 400;
+	font-style: normal;
+	letter-spacing: 0;
+	margin: 0 0 20px 0;
+}
+
+.about-page .about a {
+	display: inline-block;
+	text-decoration: none;
+	color: #000000;
+}
+
+
+/*-----------------------------------------------------
+-------------- About Page Styling Ends ----------------
+-----------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------
+--------- Portfolio Page Styling Starts ---------------
+-----------------------------------------------------*/
+
+.portfolio {
+	padding: 0;
+	background: #F2F2F2;
+	overflow: hidden;
+}
+
+.portfolio-page {
+	padding: 100px 0 0 0;
+}
+
+.portfolio-intro {
+	text-align: center;
+	padding: 0 0 50px 0;
+}
+
+.portfolio-intro h1 {
+	font-family: 'Playfair Display';
+	font-size: 28px;
+	font-weight: 700;
+	margin: 0 0 10px 0;
+}
+
+.portfolio-intro p {
+	font-family: Poppins;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: 0;
+	line-height: 1.4;
+	margin: 0 0 20px 0;
+}
+
+.portfolio-intro p:after {
+	content: "";
+	display: block;
+	height: 1px;
+	width: 100px;
+	background: #A1A1A1;
+	margin: 0 auto;
+	margin-top: 15px
+}
+
+.portfolio-button {
+	padding: 30px 0 30px 0;
+}
+
+
+.portfolio nav {
+ padding-bottom: 50px;
+ text-align: right;
+}
+
+.portfolio .categories ul li {
+ display: inline;
+  list-style: none;
+}
+
+.portfolio .categories ul li a {
+   display: inline;
+   font-family: Poppins;
+   font-weight: 400;
+   font-size: 12px;
+   line-height: 2.5;
+	 letter-spacing: 1px;
+   text-decoration: none;
+	 text-transform: uppercase;
+   color: #666666;
+   margin-right: 20px;
+}
+
+.portfolio .categories ul li a.active {
+   text-decoration: line-through;
+   color: #000000;
+}
+
+.portfolio_filter {
+   padding-left: 0;
+}
+
+@media (max-width: 991px) {
+   .portfolio span {
+       margin-bottom: 0;
+       text-align: center;
+       width: 100%;
+   }
+   .portfolio .categories ul li {
+       text-align: center;
+   }
+   .portfolio .categories ul li a {
+       margin-left: 20px;
+   }
+}
+
+@media only screen and (max-width: 420px) {
+
+  .portfolio-3-intro {
+    padding: 1em;
+  }
+
+  .portfolio-3-intro h1 {
+    font-size: 2em;
+  }
+
+ .portfolio .categories ul li {
+   display: block;
+     text-align: center;
+ }
+ .portfolio .categories ul li a {
+  display: block;
+  line-height: 1;
+  padding: 5px 25px;
+  margin-left: 0px;
+  margin-bottom: 20px;
+ }
+}
+
+.portfolio_item {
+  overflow: hidden;
+  margin-bottom: 0;
+  display: block;
+}
+
+.item-details {
+	text-align: left;
+	padding: 0 0 60px 0;
+}
+
+.item-details h1 {
+	font-family: 'Poppins';
+	font-size: 21px;
+	font-weight: 400;
+	color: #404040;
+	margin: 0 0 10px 0;
+}
+
+.item-details p {
+	font-family: Poppins;
+	font-size: 14px;
+	color: #BFBFBF;
+}
+
+
+.portfolio-overlay {
+ background: rgba(13, 13, 13, 1);
+ opacity: 0;
+ position:absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ opacity: 0;
+ -webkit-transition: all 0.5s;
+ -moz-transition: all 0.5s;
+ -o-transition: all 0.5s;
+   transition: all 0.5s;
+
+}
+
+.overlay-items {
+ position: absolute;
+ top: 40%;
+ left: 0;
+ right: 0;
+}
+
+.overlay-items h2 {
+ font-family: 'Playfair Display';
+ display: block;
+ color: #FFFFFF;
+ font-size: 21px;
+ -webkit-transform: translateY(50px);
+ -moz-transform: translateY(50px);
+ -o-transform: translateY(50px);
+	transform: translateY(50px);
+ -webkit-transition: all .5s;
+ -moz-transition: all 0.5s;
+ -o-transition: all 0.5s;
+ transition: all .5s;
+ opacity: 0;
+}
+
+.overlay-items p {
+ margin-top: 1.5em;
+ opacity: 0;
+ font-size: 14px;
+ font-family: Poppins;
+ letter-spacing: 0;
+ color: #FFFFFF;
+ display: inline-block;
+ -webkit-transform: translateY(100px);
+ -moz-transform: translateY(100px);
+ -o-transform: translateY(100px);
+ transform: translateY(100px);
+ -webkit-transition: all .5s;
+ -moz-transition: all 0.5s;
+ -o-transition: all 0.5s;
+ transition: all .5s;
+}
+
+.portfolio_item:focus, .portfolio_item:hover {
+  text-decoration: none;
+}
+
+.portfolio_item:hover .portfolio-overlay {
+ 	opacity: 1;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+		transition: all 0.5s;
+}
+
+.portfolio_item:hover h2, .portfolio_item:hover p {
+ opacity: 1;
+ -webkit-transition: all 0.5s;
+ -moz-transition: all 0.5s;
+ -o-transition: all 0.5s;
+	 transition: all 0.5s;
+ -webkit-transform: translateY(0);
+ -moz-transform: translateY(0);
+ -o-transform: translateY(0);
+ transform: translateY(0);
+}
+
+.colored p {
+ background: #000000 !important;
+}
+
+/*-----------------------------------------------------
+----------- Portfolio Page Styling Ends ---------------
+-----------------------------------------------------*/
+
+
+
+/*------------------------------------------------------
+----------- Pitch Section Styling Starts ---------------
+------------------------------------------------------*/
+
+
+.pitch {
+	padding: 0 0 150px 0;
+}
+
+.pitch .inner h1 {
+	font-family: 'Playfair Display';
+	font-size: 24px;
+	font-weight: 500;
+	color: #444444;
+	line-height: 1.4;
+}
+
+.pitch .inner img {
+	margin-top: 50px;
+}
+
+
+/* ------------------------------------------------------------
+----------- Project Single Styling Starts Here ----------------
+-------------------------------------------------------------*/
+
+.project {
+	padding: 100px 0 0 0;
+}
+
+.project-intro {
+	 padding: 50px 0 0 0;
+	 overflow: hidden;
+}
+
+.project-image {
+	padding: 30px 0 0 0;
+}
+
+.project-quote {
+	padding: 50px 0 0 0;
+}
+
+.project-quote h1 {
+	font-family: 'Playfair Display';
+	font-size: 24px;
+	font-weight: 400;
+	color: #444444;
+	line-height: 1.2;
+}
+
+.project .col-md-6:nth-child(2) {
+	text-align: center;
+}
+
+.project .details {
+	padding: 10px 0 20px 0;
+}
+
+.project .details h2 {
+	font-family: 'Playfair Display';
+	font-size: 28px;
+	font-weight: 600;
+	line-height: 1.2;
+	margin: 0 0 30px 0;
+}
+
+.project .details ul {
+	list-style-type: none;
+}
+
+.project .details ul li {
+	font-family: 'Poppins';
+	font-size: 14px;
+	font-weight: 400;
+	color: #444444;
+	line-height: 1.8;
+}
+
+.project .details ul li a {
+	color: #444444;
+	text-decoration: none;
+}
+
+.project .details ul li span {
+	font-weight: 600;
+	margin-right: 10px;
+}
+
+.project-intro h1 {
+		font-family: 'Playfair Display';
+		font-size: 34px;
+		font-weight: 700;
+		line-height: 1.1;
+		margin: 0 0 20px 0;
+	}
+
+.project-intro p {
+	font-family: 'Poppins';
+	font-size: 14px;
+	font-weight: 400;
+	color: #A1A1A1;
+	line-height: 1.4;
+	margin: 0 0 20px 0;
+}
+
+
+.project-nav {
+	padding: 50px 0 50px 0;
+	overflow: hidden;
+}
+
+.project-main i {
+	font-size: 34px;
+	font-weight: 700;
+	color: #444444;
+}
+
+.project-nav .nav-icon {
+	display: inline;
+	font-size: 32px;
+	color: #444444;
+	float: left;
+}
+
+.project-nav .nav-icon.right {
+	display: inline;
+	float: right;
+}
+
+.project-nav .inner-nav {
+	display: inline;
+}
+
+.project-nav .inner-nav a {
+	display: block;
+	font-family: Poppins;
+	font-size: 16px;
+	font-weight: 600;
+	color: #444444;
+	margin: 8px 0 0 20px;
+	text-decoration: none;
+	-webkit-transition: 0.4s;
+	-moz-transition: 0.4s;
+	-o-transition: 0.4s;
+	transition: 0.4s;
+}
+
+.project-nav .right {
+	text-align: right;
+}
+
+.project-nav .right a {
+	display: block;
+	font-family: Poppins;
+	font-size: 16px;
+	font-weight: 600;
+	color: #444444;
+	text-decoration: none;
+	margin: 8px 20px 0 0;
+}
+
+.project-nav .inner-nav:hover a {
+	margin-left: 30px;
+}
+
+.project-nav .right:hover a {
+	margin-right: 30px;
+}
+
+/*-----------------------------------------------------------
+--------------- Contact Page Styling Starts -----------------
+-------------------------------------------------------------*/
+
+.contact-form {
+	padding-top: 50px;
+}
+
+label {
+	display: block;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+	text-align: left;
+}
+
+.form-control {
+  border: 0px;
+  border-radius: 0px;
+  margin-top: 10px;
+  background: transparent;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #999999;
+  -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0);
+  box-shadow: inset 0 0px 0px rgba(0,0,0,0);
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.form-control:focus {
+  border-color: #FF0000;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.form-control::-webkit-input-placeholder {
+  font-family: Poppins;
+  font-size: 12px;
+  color: #999999;
+}
+.form-control:-moz-placeholder {
+  font-family: Poppins;
+  font-size: 12px;
+  color: #999999;
+}
+.form-control::-moz-placeholder {
+  font-family: Poppins;
+  font-size: 12px;
+  color: #999999;
+}
+.form-control:-ms-input-placeholder {
+  font-family: Poppins;
+  font-size: 12px;
+  color: #999999;
+}
+
+.text-muted {
+  font-family: Poppins;
+  font-size: 12px;
+  color: #222;
+}
+
+.text-muted strong {
+  color: #FF3333;
+}
+
+.btn-send {
+  font-family: Poppins;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  border-radius: 0px;
+  color: #FFFFFF;
+  background: #FF0000;
+	border-color: #FF0000;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.btn-send:hover {
+  color: #FF0000;
+  background: transparent;
+	border-color: #FF0000;
+  outline: none !important;
+}
+
+.btn-send:focus {
+  color: #FFFFFF;
+  background: #FF0000;
+	border-color: #FF0000;
+  outline: none !important;
+}
+
+/* -------- Contact Section Styling Ends ---- */
+
+
+
+/* ----------------------------------------------------
+----------- Footer Styling Starts Here ----------------
+-----------------------------------------------------*/
+
+.footer {
+	padding: 100px 0 10px 0;
+	overflow: hidden;
+}
+
+.has-nav .footer {
+	overflow: hidden;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.main .footer {
+	background: #111111;
+}
+
+.main .footer .cta h1, .main .footer .cta a, .main .footer .social ul li a, .main .footer .address h2 {
+	color: #F9F9F9;
+}
+
+
+.footer .cta {
+	padding:  0 0 100px 0;
+}
+
+.footer .cta h1 {
+	font-family: 'Playfair Display';
+	font-size: 32px;
+	font-weight: 700;
+	color: #111111;
+	line-height: 1.2;
+	margin: 0 0 40px 0;
+}
+
+.footer .cta h1 span {
+	color: #FF3333;
+}
+
+.footer .cta ul {
+	list-style-type: none;
+}
+
+.footer .cta ul li {
+	display: block;
+}
+
+.footer .cta a {
+	font-family: 'Playfair Display';
+	font-size: 16px;
+	font-weight: 700;
+	color: #111111;
+	line-height: 1.1;
+	display: block;
+	text-decoration: none;
+}
+
+.footer .cta a:hover {
+	color: #FF3333;
+}
+
+.footer .social ul {
+	list-style-type: none;
+	margin-top: 0;
+}
+
+.footer .social ul li {
+	display: inline;
+	margin-right: 15px;
+}
+
+.footer .social ul li a {
+	font-family: 'Playfair Display';
+	font-size: 13px;
+	font-weight: 700;
+	color: #111111;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.footer .social ul li a:hover {
+	color: #FF3333;
+}
+
+.footer .address {
+	text-align: right;
+}
+
+.footer .address h2 {
+	font-family: 'Playfair Display';
+	font-size: 13px;
+	font-weight: 700;
+	color: #111111;
+	line-height: 1.4;
+}
+
+
+
+/*----------------------------------------------------
+------------- All ------------------------------------
+--------------------- Media --------------------------
+------------------------------- Queries --------------
+-----------------------------------------------------*/
+
+ @media only screen and (min-width: 767px) {
+
+	#left, #right {
+			width: 25px;
+			}
+	#top {
+			height: 25px;
+		}
+	#bottom {
+			height: 25px;
+		}
+
+		.logo {
+			font-size: 18px;
+			transform: rotate(90deg);
+			right: 5px;
+			top: 40%;
+		}
+
+
+		.menu-inner .navigation {
+			padding: 120px 50px 0 0;
+			height: 100%;
+			text-align: right;
+		}
+
+		.menu-inner .navigation ul li {
+			font-size: 48px;
+		}
+
+		.menu-inner .about {
+			padding: 150px 0 0 0;
+		}
+
+
+		.about-page .about {
+			padding: 0 30px 0 0;
+		}
+
+		.menu-inner .about h1 {
+			font-size: 64px;
+		}
+
+		.menu .about p {
+			font-size: 14px;
+			line-height: 1.7;
+		}
+
+		.main .intro h1 {
+			font-size: 42px;
+		}
+
+		.about-page .about p {
+			font-size: 14px;
+		}
+
+		.about-page .about h1 {
+			font-size: 54px;
+		}
+
+		.about-page .details {
+			padding: 50px 0 0 30px;
+		}
+
+		.about-page .awards {
+			padding: 50px 0 0 30px;
+		}
+
+		.about-page .details h1 {
+			font-size: 28px;
+		}
+
+		.portfolio {
+			padding: 100px 0 100px 0;
+		}
+
+		.project .details h2 {
+			font-size: 34px;
+		}
+
+		.portfolio-intro h1 {
+			font-size: 34px;
+		}
+
+		.project-intro h1 {
+			font-size: 42px;
+		}
+
+		.overlay-items h2 {
+		 font-size: 24px;
+		}
+
+		.pitch .inner h1 {
+			font-size: 28px;
+		}
+
+		.project-nav .nav-icon {
+			font-size: 28px;
+		}
+
+		.project-nav .inner-nav a {
+			font-size: 18px;
+			margin: 5px 0 0 40px;
+		}
+
+		.project-nav .right a {
+			font-size: 18px;
+			margin: 5px 40px 0 0;
+		}
+
+		.footer {
+			padding: 100px 0 50px 0;
+		}
+
+		.footer .cta h1 {
+			font-size: 42px;
+			margin: 0 0 40px 0;
+		}
+
+		.footer .cta a {
+			font-size: 18px;
+		}
+
+		.footer .social ul {
+			margin-top: 10px;
+		}
+}
+
+@media only screen and (min-width: 767px) and (max-width: 800px) {
+
+		.back-home {
+			position: absolute;
+			left: 20px;
+			top: 10px;
+			z-index: 111;
+		}
+
+		.back-home i {
+			font-size: 21px;
+		}
+
+}
+
+@media only screen and (min-width: 800px) {
+
+
+	.back-home {
+		position: absolute;
+		left: 20px;
+		top: 10px;
+	}
+
+
+	#side-menu {
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: 40px;
+		height: 100%;
+		background: #FFFFFF;
+		z-index: 111;
+	}
+
+	.main {
+		padding-right: 40px;
+	}
+
+}

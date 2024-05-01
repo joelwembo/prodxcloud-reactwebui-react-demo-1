@@ -1,0 +1,179 @@
+
+.main .intro h1 {
+	font-family: 'Poppins';
+	font-weight: 700;
+	letter-spacing: -1px;
+}
+
+.menu .about h1 {
+	font-size: 42px;
+	font-family: 'Poppins';
+	font-weight: 700;
+	letter-spacing: -1px;
+}
+
+
+  .menu-inner .details h1 {
+  	font-family: 'Poppins';
+  }
+
+
+.btn-action {
+	font-family: 'Poppins';
+}
+
+
+.about-page .details h1 {
+	font-family: 'Poppins';
+	font-weight: 400;
+}
+
+.about-page .details h4 {
+	font-family: 'Poppins';
+}
+
+.about-page .about h1 {
+	font-family: 'Poppins';
+	font-weight: 700;
+	letter-spacing: -1px;
+}
+
+.portfolio-intro h1 {
+	font-family: 'Poppins';
+	font-size: 32px;
+	font-weight: 700;
+  letter-spacing: -1px;
+	margin: 0 0 10px 0;
+}
+
+
+.overlay-items h2 {
+ font-family: 'Poppins';
+ font-size: 21px;
+}
+
+.pitch .inner h1 {
+	font-family: 'Poppins';
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.project-quote h1 {
+	font-family: 'Poppins';
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.project .details h2 {
+	font-family: 'Poppins';
+	font-size: 28px;
+	font-weight: 700;
+  letter-spacing: -1px;
+	line-height: 1.2;
+	margin: 0 0 30px 0;
+}
+
+
+.project-intro h1 {
+		font-family: 'Poppins';
+		font-size: 34px;
+		font-weight: 700;
+		line-height: 1.1;
+    letter-spacing: -1px;
+		margin: 0 0 20px 0;
+}
+
+
+  .footer .cta h1 {
+  	font-family: 'Poppins';
+  	font-size: 32px;
+  	font-weight: 700;
+  	color: #111111;
+  	line-height: 1.2;
+    letter-spacing: -1px;
+  	margin: 0 0 40px 0;
+}
+
+.footer .cta a {
+	font-family: 'Poppins';
+	font-size: 16px;
+	font-weight: 400;
+	color: #111111;
+	line-height: 1.1;
+	display: block;
+	text-decoration: none;
+}
+
+.footer .social ul li a {
+	font-family: 'Poppins';
+	font-size: 13px;
+	font-weight: 400;
+	color: #111111;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.footer .address h2 {
+	font-family: 'Poppins';
+	font-size: 13px;
+	font-weight: 400;
+	color: #111111;
+	line-height: 1.4;
+}
+
+
+
+ @media only screen and (min-width: 767px) {
+
+		.menu-inner .about h1 {
+			font-size: 64px;
+		}
+
+		.main .intro h1 {
+			font-size: 42px;
+		}
+
+		.about-page .about p {
+			font-size: 14px;
+		}
+
+		.about-page .about h1 {
+			font-size: 54px;
+		}
+
+		.about-page .details h1 {
+			font-size: 28px;
+		}
+
+		.project .details h2 {
+			font-size: 34px;
+		}
+
+		.portfolio-intro h1 {
+			font-size: 34px;
+		}
+
+		.project-intro h1 {
+			font-size: 42px;
+		}
+
+		.overlay-items h2 {
+		 font-size: 24px;
+		}
+
+		.pitch .inner h1 {
+			font-size: 28px;
+		}
+
+		.footer .cta h1 {
+			font-size: 42px;
+			margin: 0 0 40px 0;
+		}
+
+		.footer .cta a {
+			font-size: 18px;
+		}
+
+		}
+
+ 
