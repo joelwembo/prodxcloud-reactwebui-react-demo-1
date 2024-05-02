@@ -2,6 +2,9 @@
 
 In this post, I explain how to use the Jenkins open-source automation server to deploy AWS CloudFront, ACM for SSL Certification, S3 bucket for static web hosting, and Route53 for custom domain names with Terraform, creating a functioning CI/CD pipeline. When properly implemented, the CI/CD pipeline is triggered by code changes pushed to your GitHub repo, automatically fed into a new Jenkins Job, then the output is deployed on AWS CloudFront and S3.
 
+- [@Joel O. Wembo](https://www.joelotepawembo.com)
+- [@twitter](twitter.com/joelwembo1)
+- [@linkedin](https://www.linkedin.com/in/joelotepawembo)
 
 
 ### Prerequisites:
@@ -65,7 +68,7 @@ aws configure
 ```
 npm run build
 ```
-### Generate SSH keys
+### `#Generate SSH keys`
 
 
 ```
@@ -77,3 +80,26 @@ Enter passphrase (empty for no passphrase):  # Can be left blank
 # 2. Ensure private key is not publicly viewable
 chmod 400 ~/.ssh/mykey
 ```
+
+> [!NOTE]
+> This project contains multiple types of deployments.
+
+## Ansible Doc
+
+[Ansible Doc](deployments/docs/Ansible-EC2-React.png)
+
+## Jenkins Doc
+
+[Jenkins  Doc](deployments/docs/Ansible-EC2-React.drawio)
+
+
+Thank you for Reading !! 🙌🏻, see you in the next article.🤘
+
+# For more information about the author visit
+
+- [@Joel O. Wembo](https://www.joelotepawembo.com)
+- [@twitter](twitter.com/joelwembo1)
+- [@linkedin](https://www.linkedin.com/in/joelotepawembo)
+
+
+
