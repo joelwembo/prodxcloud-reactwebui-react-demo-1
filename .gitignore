@@ -24,3 +24,5 @@ yarn-error.log*
 node_modules
 # deployments
 # ./deployments
+*venv
+*.venv
