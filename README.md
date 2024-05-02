@@ -26,6 +26,19 @@ Before we get into the good stuff, first we need to make sure we have the requir
 - Basic knowledge of HTML or React
 - Any Browser for testing
 
+# Requirements
+
+- [x] #1 Create AWS Access Keys
+- [x] Set Up Custom Domain
+- [x] Create your React / Front-End Application :tada:
+- [x] #2 Provision an AWS EC2 instance with Ansible
+- [x] Jenkins Installation
+- [x] Setting up a CI/CD pipeline using Terraform :tada:
+- [x] Terraform Cloud Configuration
+- [x] Check result in your AWS Management Console :tada:
+
+@octocat :+1: This project looks great - Let’s Get It Started! :shipit:
+
 ## local testing
 
 In the project directory, you can run:
@@ -85,6 +98,8 @@ chmod 400 ~/.ssh/mykey
 
 > [!NOTE]
 > This project contains multiple types of deployments.
+
+
 
 ## Ansible Doc
 
