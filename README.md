@@ -1,4 +1,6 @@
 # DevOps Engineering: End-to-End CI/CD Pipeline for react applications to AWS CloudFront using Ansible, Jenkins, and Terraform
+![image](https://github.com/joelwembo/prodx-reactwebui-react-demo-1/assets/19718580/79a378fc-d26a-4686-80db-cb2ce26a7eaa)
+
 
 In this post, I explain how to use the Jenkins open-source automation server to deploy AWS CloudFront, ACM for SSL Certification, S3 bucket for static web hosting, and Route53 for custom domain names with Terraform, creating a functioning CI/CD pipeline. When properly implemented, the CI/CD pipeline is triggered by code changes pushed to your GitHub repo, automatically fed into a new Jenkins Job, then the output is deployed on AWS CloudFront and S3.
 
