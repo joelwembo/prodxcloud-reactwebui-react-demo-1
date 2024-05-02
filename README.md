@@ -105,9 +105,208 @@ chmod 400 ~/.ssh/mykey
 
 [Ansible Doc](deployments/docs/Ansible-EC2-React.png)
 
+```
+
+# AWS playbook
+---
+- hosts: localhost
+  connection: local
+  gather_facts: True
+
+  vars:
+    key_name: prodxsecure         # Key used for SSH
+    region: us-east-1      # Region may affect response and pricing
+    image: ami-04b70fa74e45c3917 # look in ec2 > ami (filter owner alias: amazon) or amis of manually launched instances
+    id: "prodxcloud-aws-ec2-lab-1"
+    instance_type: t2.micro       # Choose instance type, check AWS for pricing
+    # vpc_id: subnet-012345
+    sec_group: "prodxcloud-aws-ec2-lab-1"
+
+  tasks:
+    - name: Provisioning EC2 instances
+      block:
+
+      - name: Create security group
+        amazon.aws.ec2_security_group:
+          name: "{{ sec_group }}"
+          description: "Sec group for app"
+          region: "{{ region }}"
+          # aws_access_key: "{{ec2_access_key}}"  # From vault as defined
+          # aws_secret_key: "{{ec2_secret_key}}"  # From vault as defined
+          rules:                                # allows ssh on port 22
+            - proto: tcp
+              ports:
+                - 22
+              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on ssh port
+            - proto: tcp
+              ports:
+                - 8181
+              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on port 8181
+
+            - proto: tcp
+              ports:
+                - 80
+              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on port 80 
+
+            - proto: tcp
+              ports:
+                - 8080
+              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on port 8080 
+
+            - proto: tcp
+              ports:
+                - 9000
+              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on port 9000  
+
+            - proto: tcp
+              ports:
+                - 8000
+              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on port 8000
+
+            - proto: tcp
+              ports:
+                - 3306
+              cidr_ip: 0.0.0.0/0
+              rule_desc: allow all on port 3306         
+
+      - name: Amazon EC2 | Create Key Pair      # Create key pair for ssh
+        amazon.aws.ec2_key:
+          name: "{{ key_name }}"
+          region: "{{ region }}"
+          # aws_access_key: "{{ec2_access_key}}"  # From vault as defined
+          # aws_secret_key: "{{ec2_secret_key}}"  # From vault as defined
+          key_material: "{{ item }}"
+        with_file: prodxsecure1.pem
+
+      - name: Start an instance with a public IP address
+        amazon.aws.ec2_instance:
+          name: "public-compute-instance"
+          key_name: "{{ key_name }}"
+          # vpc_subnet_id: "{{ vpc_id }}"
+          instance_type: "{{ instance_type }}"
+          security_group: "{{ sec_group }}"
+           # aws_access_key: "{{ec2_access_key}}"  # From vault as defined
+          # aws_secret_key: "{{ec2_secret_key}}"  # From vault as defined
+          region: "{{ region }}"
+          network:
+            assign_public_ip: true
+          image_id: "{{ image }}"
+          tags:
+            Environment: Testing
+
+      # Always require the 'create_ec2' tag to provision EC2 instance
+      tags: ['never', 'create_ec2'] 
+
+    - name: Facts
+      block: # this block prints out instance data
+
+      - name: Get instances facts
+        ec2_instance_info:
+           # aws_access_key: "{{ec2_access_key}}"  # From vault as defined
+          # aws_secret_key: "{{ec2_secret_key}}"  # From vault as defined
+          region: "{{ region }}"
+        register: result
+
+      - name: Instances ID
+        debug:
+          msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
+        loop: "{{ result.instances }}"
+      tags: always
+
+
+```
+
+
 ## Jenkins Doc
 
 [Jenkins  Doc](deployments/docs/Ansible-EC2-React.drawio)
+
+```
+
+pipeline {
+    agent any
+     options {
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+      }
+       environment {
+        DOMAIN_NAME = ""
+        PUBLIC_S3_BUCKET = ""
+        DOCKERHUB_CREDENTIALS = credentials('globaldockerhub')
+        appName = "server"
+        registry = ""
+        registryCredential = ""
+        projectPath = ""
+        AWS_ACCOUNT=credentials('AWS_ACCOUNT')
+        AWS_ACCESS_KEY_ID=credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY=credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_REGION=credentials('AWS_REGION')
+        AWS_EC2_INSTANCE=credentials('AWS_EC2_INSTANCE') # 34.238.119.22 
+        AWS_SSH_KEY = credentials('AWS_SSH_KEY')
+      }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/joelwembo/prodx-reactwebui-react-demo-1.git'
+            }
+        }
+
+         stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+         stage('Run Mocha Tests') {
+            steps {
+                sh 'npm run test' // Assuming your tests are run with 'npm test'
+            }
+        }
+
+        stage('Build React App') {
+            steps {
+                sh 'npm run build' // Build the React application only if tests pass (conditional stage success)
+            }
+        }
+
+        stage('Provision AWS Infrastructure (Terraform)') {
+            steps {
+                sh 'terraform init' // Initialize Terraform
+                sh 'terraform plan' // Validate Terraform configuration
+                input 'Confirm?' message: 'Are you sure you want to deploy to AWS?'
+                sh 'terraform apply -auto-approve' // Apply Terraform configuration (requires confirmation)
+            }
+        }
+        stage('Deploy to CloudFront') {
+            steps {
+                // Upload built React app to S3 bucket (replace with your upload script)
+                sh 'aws s3 cp build/ s3://your-bucket-name/ --recursive --profile default'
+                // Check if Cloudfront was created && Invalidate CloudFront cache to ensure latest content is served (replace with your invalidation script)
+                sh 'aws cloudfront create-invalidation --distribution-id your-distribution-id --paths "/*" --profile default'
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs() // Clean workspace after pipeline execution
+        }
+        success {
+            // Optional: Send notification on successful builds (e.g., email)
+        }
+        failure {
+            // Optional: Send notification on failed builds (e.g., email)
+        }
+    }
+}
+
+```
 
 
 Thank you for Reading !! 🙌🏻, see you in the next article.🤘
