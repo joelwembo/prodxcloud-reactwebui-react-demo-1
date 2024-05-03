@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: prodxcloud-deployment
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: prodxcloud
@@ -26,13 +26,13 @@ kind: Service
 metadata:
   name: prodxcloud
 spec:
-# externalIPs:
-  # - 18.141.186.159
+  externalIPs:
+    - 127.0.0.1
   ports:
   - port: 80
     protocol: TCP
     targetPort: 80
-    nodePort: 31000
+    nodePort: 80
   selector:
     app: prodxcloud
   type: LoadBalancer
