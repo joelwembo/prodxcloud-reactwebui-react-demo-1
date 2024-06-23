@@ -3,9 +3,7 @@ name: Matchder Build and Deploy
 on:
   push:
     branches:
-      - main
       - uat
-      - master
 
 env:
   ENVIRONMENT: ${{ github.ref_name }}
@@ -13,9 +11,9 @@ env:
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
   REMOTE_USER: ${{ secrets.REMOTE_USER }}
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}  
-  # VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-  # VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
-  # VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
+  VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+  VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+  VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
 
 jobs:
   # This workflow contains a single job called "build"
@@ -32,13 +30,13 @@ jobs:
       
       # - name: Build Web UI
       #   env:
-      #     VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-      #     VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
-      #     VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
+      #     VITE_SUPABASE_URL: ${{ env.VITE_SUPABASE_URL }}
+      #     VITE_SUPABASE_ANON_KEY: ${{ env.VITE_SUPABASE_ANON_KEY }}
+      #     VITE_GMAPS_API_KEY: ${{ env.VITE_GMAPS_API_KEY }}
       #   run: |
       #     sudo npm i && sudo VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY VITE_SUPABASE_URL=$VITE_SUPABASE_URL VITE_GMAPS_API_KEY=$VITE_GMAPS_API_KEY npm run build
 
-      # testing only
+      # npm testing only
       - name: Install dependencies
         run: npm install --force
 
