@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - uat
+      - main
 
 env:
   ENVIRONMENT: ${{ github.ref_name }}
@@ -11,9 +12,9 @@ env:
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
   REMOTE_USER: ${{ secrets.REMOTE_USER }}
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}  
-  VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-  VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
-  VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
+  # VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+  # VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+  # VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
 
 jobs:
   # This workflow contains a single job called "build"
