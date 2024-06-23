@@ -1,0 +1,63 @@
+name: Matchder Build and Deploy
+
+on:
+  push:
+    branches:
+      - uat
+
+env:
+  ENVIRONMENT: ${{ github.ref_name }}
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    name: Build the UI and Deploy to AWS EC2
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+# Below this are each of the steps that are run
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Build Web UI
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
+        run: |
+          sudo npm i && sudo VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY VITE_SUPABASE_URL=$VITE_SUPABASE_URL VITE_GMAPS_API_KEY=$VITE_GMAPS_API_KEY npm run build
+
+      - name: Cleanup EC2 uat_files
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSHKEY }}
+          REMOTE_HOST: ${{ secrets.AWS_UAT_IP }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        run: |
+          echo "${PRIVATE_KEY}" > PK && chmod 600 PK   
+          ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${REMOTE_HOST} '
+            rm -rf uat_files && mkdir -vp uat_files
+            '    
+          #ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST}
+
+      - name: SCP to EC2 uat_files
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSHKEY }}
+          REMOTE_HOST: ${{ secrets.AWS_UAT_IP }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        run: |
+          scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${REMOTE_HOST}:~/uat_files
+          #scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST}:~/uat_files
+         
+      - name: Copy uat_files to WWW
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSHKEY }}
+          REMOTE_HOST: ${{ secrets.AWS_UAT_IP }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        run: |
+          echo "${PRIVATE_KEY}" > PK && chmod 600 PK            
+          ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${REMOTE_HOST} '
+            cd uat_files/dist && sudo cp -rf * /usr/share/nginx/html/
+            '
+          #ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST} '

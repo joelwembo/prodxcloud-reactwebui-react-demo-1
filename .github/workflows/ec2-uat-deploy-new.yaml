@@ -41,6 +41,7 @@ jobs:
         username: ${{ env.REMOTE_USER }}
         key: ${{ env.PRIVATE_KEY}}
         script: |
+          sudo systemctl stop nginx
           sudo mkdir -p /var/www/html
           sudo chmod -R 755 /build
           sudo chown -R $USER:$USER /var/www/html
@@ -52,7 +53,7 @@ jobs:
         host: ${{ env.REMOTE_HOST }}
         username: ${{ env.REMOTE_USER }}
         key: ${{ env.PRIVATE_KEY}}
-        source: "build/*"
+        source: "build/**"
         target: "/var/www/html/"
 
 
