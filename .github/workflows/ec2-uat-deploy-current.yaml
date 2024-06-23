@@ -1,9 +1,9 @@
-name: Matchder Build and Deploy
+name: prodxcloud.io Build and Deploy
 
 on:
   push:
     branches:
-      - PROD
+      - prod
       - main
 
 env:
