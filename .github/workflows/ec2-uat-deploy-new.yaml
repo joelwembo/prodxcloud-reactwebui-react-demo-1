@@ -33,6 +33,18 @@ jobs:
 
     - name: Build the React application
       run: npm run build
+      
+    - name: Ensure /var/www/html directory exists and has correct permissions
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ env.REMOTE_HOST }}
+        username: ${{ env.REMOTE_USER }}
+        key: ${{ env.PRIVATE_KEY}}
+        script: |
+          sudo mkdir -p /var/www/html
+          sudo chmod -R 755 /build
+          sudo chown -R $USER:$USER /var/www/html
+          sudo chmod -R 755 /var/www/html
 
     - name: Copy files via SSH
       uses: appleboy/scp-action@v0.1.1
@@ -40,8 +52,9 @@ jobs:
         host: ${{ env.REMOTE_HOST }}
         username: ${{ env.REMOTE_USER }}
         key: ${{ env.PRIVATE_KEY}}
-        source: "build/"
+        source: "build/*"
         target: "/var/www/html/"
+
 
     - name: Restart Nginx
       uses: appleboy/ssh-action@master
