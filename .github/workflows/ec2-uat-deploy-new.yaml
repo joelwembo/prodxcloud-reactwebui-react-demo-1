@@ -1,0 +1,54 @@
+name: Deploy React App to UAT EC2
+
+on:
+  push:
+    branches:
+      - main
+      - uat
+      - master
+
+
+env:
+  PRIVATE_KEY: ${{ secrets.EC2_SSHKEY }}
+  REMOTE_HOST: ${{ secrets.AWS_UAT_IP }}
+  REMOTE_USER: ${{ secrets.REMOTE_USER }}
+  # VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+  # VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+  # VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install --force
+
+    - name: Build the React app
+      run: npm run build
+
+    - name: Copy files via SSH
+      uses: appleboy/scp-action@v0.1.1
+      with:
+        host: ${{ env.REMOTE_HOST }}
+        username: ${{ env.REMOTE_USER }}
+        key: ${{ env.PRIVATE_KEY}}
+        source: "build/"
+        target: "/var/www/html/"
+
+    - name: Restart Nginx
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ env.REMOTE_HOST }}
+        username: ${{ env.REMOTE_USER }}
+        key: ${{ env.PRIVATE_KEY}}
+        script: |
+          sudo systemctl restart nginx
