@@ -18,21 +18,21 @@ sudo systemctl status nginx
 
 
 # nginx installer for amazon lunix 2
-# # Update package index
+# # Update package index #
 # sudo yum update -y
 
 # # Install the Extra Packages for Enterprise Linux (EPEL) repository
-# sudo amazon-linux-extras install epel -y
+sudo amazon-linux-extras install epel -y
 
-# # Install Nginx
-# sudo yum install -y nginx
+# Install Nginx
+sudo yum install -y nginx
 
-# # Start Nginx service
-# sudo systemctl start nginx
+# Start Nginx service
+sudo systemctl start nginx
 
-# # Enable Nginx to start on boot
-# sudo systemctl enable nginx
+# Enable Nginx to start on boot
+sudo systemctl enable nginx
 
-# # Print Nginx status
-# sudo systemctl status nginx
+# Print Nginx status
+sudo systemctl status nginx
 
