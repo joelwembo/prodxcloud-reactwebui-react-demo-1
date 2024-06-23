@@ -11,10 +11,13 @@ env:
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
   REMOTE_USER: ${{ secrets.REMOTE_USER }}
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}  
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: "us-east-1"   
 
 jobs:
   build:
-    name: Build the UI and Deploy to AWS PROD EC2
+    name: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -51,13 +54,27 @@ jobs:
         run: |
           scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${REMOTE_HOST}:~/prod_contents
          
-      - name: Copy prod_contents to nginx public directory
-        env:
-          host: ${{ env.REMOTE_HOST }}
-          username: ${{ env.REMOTE_USER }}
-          key: ${{ env.PRIVATE_KEY}}
-        run: |
-          echo "${PRIVATE_KEY}" > PK && chmod 600 PK            
-          ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${REMOTE_HOST} '
-            cd prod_contents/dist && sudo cp -rf * /usr/share/nginx/html/
-            '
+      
+  deploy:
+      name: Build Docker image and push to repositories
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v4
+          with:
+            node-version: ${{ matrix.node-version }}
+            cache: 'npm'
+
+        - name: Copy prod_contents to nginx public directory
+          env:
+            host: ${{ env.REMOTE_HOST }}
+            username: ${{ env.REMOTE_USER }}
+            key: ${{ env.PRIVATE_KEY}}
+          run: |
+              echo "${PRIVATE_KEY}" > PK && chmod 600 PK            
+              ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${REMOTE_HOST} '
+                cd prod_contents/dist && sudo cp -rf * /usr/share/nginx/html/
+                '    
