@@ -3,24 +3,20 @@ name: Matchder Build and Deploy
 on:
   push:
     branches:
-      - uat
+      - PROD
       - main
 
 env:
   ENVIRONMENT: ${{ github.ref_name }}
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
   REMOTE_USER: ${{ secrets.REMOTE_USER }}
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}  
-  # VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-  # VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
-  # VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
 
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    name: Build the UI and Deploy to AWS UAT EC2
+    name: Build the UI and Deploy to AWS PROD EC2
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
 # Below this are each of the steps that are run
@@ -28,22 +24,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      # - name: Build Web UI
-      #   env:
-      #     VITE_SUPABASE_URL: ${{ env.VITE_SUPABASE_URL }}
-      #     VITE_SUPABASE_ANON_KEY: ${{ env.VITE_SUPABASE_ANON_KEY }}
-      #     VITE_GMAPS_API_KEY: ${{ env.VITE_GMAPS_API_KEY }}
-      #   run: |
-      #     sudo npm i && sudo VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY VITE_SUPABASE_URL=$VITE_SUPABASE_URL VITE_GMAPS_API_KEY=$VITE_GMAPS_API_KEY npm run build
-
-      # npm testing only
       - name: Install dependencies
         run: npm install --force
 
       - name: Build the React application
         run: npm run build
-      - name: Cleanup EC2 uat_files
+      - name: Prepare EC2 prod_contents Folder
         env:
           host: ${{ env.REMOTE_HOST }}
           username: ${{ env.REMOTE_USER }}
@@ -51,20 +37,20 @@ jobs:
         run: |
           echo "${PRIVATE_KEY}" > PK && chmod 600 PK   
           ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${REMOTE_HOST} '
-            rm -rf uat_files && mkdir -vp uat_files
+            rm -rf prod_contents && mkdir -vp prod_contents
             '    
           #ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST}
 
-      - name: SCP to EC2 uat_files
+      - name: SCP ( COPY ) to EC2 prod_contents
         env:
           host: ${{ env.REMOTE_HOST }}
           username: ${{ env.REMOTE_USER }}
           key: ${{ env.PRIVATE_KEY}}
         run: |
-          scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${REMOTE_HOST}:~/uat_files
-          #scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST}:~/uat_files
+          scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${REMOTE_HOST}:~/prod_contents
+          #scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST}:~/prod_contents
          
-      - name: Copy uat_files to WWW
+      - name: Copy prod_contents to WWW
         env:
           host: ${{ env.REMOTE_HOST }}
           username: ${{ env.REMOTE_USER }}
@@ -72,6 +58,6 @@ jobs:
         run: |
           echo "${PRIVATE_KEY}" > PK && chmod 600 PK            
           ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${REMOTE_HOST} '
-            cd uat_files/dist && sudo cp -rf * /usr/share/nginx/html/
+            cd prod_contents/dist && sudo cp -rf * /usr/share/nginx/html/
             '
           #ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST} '
