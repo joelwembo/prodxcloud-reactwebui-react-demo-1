@@ -64,5 +64,7 @@ jobs:
         username: ${{ env.REMOTE_USER }}
         key: ${{ env.PRIVATE_KEY}}
         script: |
+          pwd
+          ls
           cd build && sudo cp -rf * /var/www/html/
           sudo systemctl restart nginx
