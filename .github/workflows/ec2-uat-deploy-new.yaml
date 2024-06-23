@@ -47,17 +47,17 @@ jobs:
           sudo chown -R $USER:$USER /var/www/html
           sudo chmod -R 755 /var/www/html
 
-    - name: Copy files via SSH
-      uses: appleboy/scp-action@v0.1.1
-      with:
-        host: ${{ env.REMOTE_HOST }}
-        username: ${{ env.REMOTE_USER }}
-        key: ${{ env.PRIVATE_KEY}}
-        source: "build/**"
-        target: ""
+    # - name: Copy files via SSH
+    #   uses: appleboy/scp-action@v0.1.1
+    #   with:
+    #     host: ${{ env.REMOTE_HOST }}
+    #     username: ${{ env.REMOTE_USER }}
+    #     key: ${{ env.PRIVATE_KEY}}
+    #     source: "build/**"
+    #     target: ""
 
 
-    - name: Restart Nginx
+    - name: Copy & Restart Nginx
       uses: appleboy/ssh-action@master
       with:
         host: ${{ env.REMOTE_HOST }}
