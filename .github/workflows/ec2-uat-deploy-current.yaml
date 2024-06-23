@@ -13,13 +13,10 @@ env:
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}  
 
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     name: Build the UI and Deploy to AWS PROD EC2
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name }}
-# Below this are each of the steps that are run
 
     steps:
       - name: Checkout
@@ -39,8 +36,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${REMOTE_HOST} '
             rm -rf prod_contents && mkdir -vp prod_contents
             '    
-          #ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST}
-
       - name: SCP ( COPY ) to EC2 prod_contents
         env:
           host: ${{ env.REMOTE_HOST }}
@@ -48,9 +43,8 @@ jobs:
           key: ${{ env.PRIVATE_KEY}}
         run: |
           scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${REMOTE_HOST}:~/prod_contents
-          #scp -o StrictHostKeyChecking=no -i "./PK" -r ./dist ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST}:~/prod_contents
          
-      - name: Copy prod_contents to WWW
+      - name: Copy prod_contents to nginx public directory
         env:
           host: ${{ env.REMOTE_HOST }}
           username: ${{ env.REMOTE_USER }}
@@ -60,4 +54,3 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${REMOTE_HOST} '
             cd prod_contents/dist && sudo cp -rf * /usr/share/nginx/html/
             '
-          #ssh -o StrictHostKeyChecking=no -i "./PK" ${REMOTE_USER}@${ENVIRONMENT}.${REMOTE_HOST} '

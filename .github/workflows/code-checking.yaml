@@ -1,0 +1,36 @@
+name: "SonarQube Code Scanning Pipeline"
+on:
+  push:
+    branches: 
+      - main
+      - master
+      - dev
+  pull_request:
+    branches: [master, dev, main]
+
+permissions:
+  contents: write   
+
+jobs:
+  CodeScan-Analysis:
+    name: SonarCloud Running
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -X
+            -Dsonar.organization=
+            -Dsonar.projectKey=
+            -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.exclusions=**/vendor/**,**/node_modules/**
+            -Dsonar.sources=.
+            -Dsonar.verbose=true
+  
