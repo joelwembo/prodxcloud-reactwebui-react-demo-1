@@ -1,70 +1,70 @@
-name: Deploy React App to UAT EC2
+# name: Deploy React App to UAT EC2
 
-on:
-  push:
-    branches:
-      - main
-      - uat
-      - master
+# on:
+#   push:
+#     branches:
+#       - main
+#       - uat
+#       - master
 
-env:
-  REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-  REMOTE_USER: ${{ secrets.REMOTE_USER }}
-  PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}  
-  # VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
-  # VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
-  # VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
+# env:
+#   REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+#   REMOTE_USER: ${{ secrets.REMOTE_USER }}
+#   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}  
+#   # VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+#   # VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+#   # VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     name: Build the UI and Deploy to AWS UAT EC2
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+#     - name: Set up Node.js
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: '16'
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+#     - name: Install dependencies
+#       run: npm install --force
 
-    - name: Install dependencies
-      run: npm install --force
-
-    - name: Build the React application
-      run: npm run build
+#     - name: Build the React application
+#       run: npm run build
       
-    - name: Ensure /var/www/html directory exists and has correct permissions
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ env.REMOTE_HOST }}
-        username: ${{ env.REMOTE_USER }}
-        key: ${{ env.PRIVATE_KEY}}
-        script: |
-          sudo systemctl stop nginx
-          sudo mkdir -p /var/www/html
-          sudo chmod -R 755 /build
-          sudo chown -R $USER:$USER /var/www/html
-          sudo chmod -R 755 /var/www/html
+#     - name: Ensure /var/www/html directory exists and has correct permissions
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ env.REMOTE_HOST }}
+#         username: ${{ env.REMOTE_USER }}
+#         key: ${{ env.PRIVATE_KEY}}
+#         script: |
+#           sudo systemctl stop nginx
+#           sudo mkdir -p /var/www/html
+#           sudo chmod -R 755 /build
+#           sudo chown -R $USER:$USER /var/www/html
+#           sudo chmod -R 755 /var/www/html
 
-    # - name: Copy files via SSH
-    #   uses: appleboy/scp-action@v0.1.1
-    #   with:
-    #     host: ${{ env.REMOTE_HOST }}
-    #     username: ${{ env.REMOTE_USER }}
-    #     key: ${{ env.PRIVATE_KEY}}
-    #     source: "build/**"
-    #     target: ""
+#     # - name: Copy files via SSH
+#     #   uses: appleboy/scp-action@v0.1.1
+#     #   with:
+#     #     host: ${{ env.REMOTE_HOST }}
+#     #     username: ${{ env.REMOTE_USER }}
+#     #     key: ${{ env.PRIVATE_KEY}}
+#     #     source: "build/**"
+#     #     target: ""
 
 
-    - name: Copy & Restart Nginx
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ env.REMOTE_HOST }}
-        username: ${{ env.REMOTE_USER }}
-        key: ${{ env.PRIVATE_KEY}}
-        script: |
-          pwd
-          ls
-          cd build && sudo cp -rf * /var/www/html/
-          sudo systemctl restart nginx
+#     - name: Copy & Restart Nginx
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ env.REMOTE_HOST }}
+#         username: ${{ env.REMOTE_USER }}
+#         key: ${{ env.PRIVATE_KEY}}
+#         script: |
+#           pwd
+#           ls
+#           cd build && sudo cp -rf * /var/www/html/
+#           sudo systemctl restart nginx
