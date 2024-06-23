@@ -57,7 +57,7 @@ jobs:
          
       
   deploy:
-      name: Copy build directory and relese to production
+      name: Copy build & deploy to nginx
       needs: build
       runs-on: ubuntu-latest
       steps:
