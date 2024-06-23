@@ -3,7 +3,9 @@ name: Matchder Build and Deploy
 on:
   push:
     branches:
+      - main
       - uat
+      - master
 
 env:
   ENVIRONMENT: ${{ github.ref_name }}
