@@ -54,7 +54,7 @@ jobs:
         username: ${{ env.REMOTE_USER }}
         key: ${{ env.PRIVATE_KEY}}
         source: "build/**"
-        target: "/var/www/html/"
+        target: ""
 
 
     - name: Restart Nginx
@@ -64,4 +64,5 @@ jobs:
         username: ${{ env.REMOTE_USER }}
         key: ${{ env.PRIVATE_KEY}}
         script: |
+          cd build && sudo cp -rf * /var/www/html/
           sudo systemctl restart nginx
