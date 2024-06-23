@@ -7,11 +7,10 @@ on:
       - uat
       - master
 
-
 env:
-  PRIVATE_KEY: ${{ secrets.EC2_SSHKEY }}
-  REMOTE_HOST: ${{ secrets.AWS_UAT_IP }}
+  REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
   REMOTE_USER: ${{ secrets.REMOTE_USER }}
+  PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}  
   # VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
   # VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
   # VITE_GMAPS_API_KEY: ${{ vars.VITE_GMAPS_API_KEY }}
@@ -32,7 +31,7 @@ jobs:
     - name: Install dependencies
       run: npm install --force
 
-    - name: Build the React app
+    - name: Build the React application
       run: npm run build
 
     - name: Copy files via SSH
